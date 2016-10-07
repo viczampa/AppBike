@@ -1,0 +1,12 @@
+- Rastreamento
+	- 2 estados: TRANSMITINDO e NÃO TRANSMITINDO a localização
+	- Apenas as pessoas que podem rastrear veem qual é o estado do rastreado
+	- Vai vir o endereço mais próximo, as coordenadas, e um mapa gráfico com a localização
+		- Opção de "Ir até lugar" que já abre o Google Maps com a rota pro lugar do rastreado
+	- Opção de notificação de "Está tudo bem?" com minutos definidos pra responder tocando nos botões
+
+- Tecnicidades
+	1. Rastreado manda pro servidor um JSON de geolocalização a cada 5 ou 10 segundos
+	2. Servidor guarda esses dados
+	3. Os rastreadores podem visualizar onde o rastreado está baseado nesses dados
+		- Refresh também com AJAX a cada 5 ou 10 segundos
