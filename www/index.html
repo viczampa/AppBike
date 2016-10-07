@@ -1,5 +1,5 @@
 <html>
-
+<meta charset='utf-8'>
 <head>
     <title></title>
     <link rel="stylesheet" href="ratchet-v2.0.2/css/ratchet.min.css">
@@ -7,29 +7,30 @@
 </head>
 
 <body>
+<div id="blockButtonsInDevice">
+  <a href="#CriarConta" class=""><button name="button" class="btn btn-primary btn-block btn-outlined">Criar uma conta no WHERE</button></a>
+</div>
+
+  <div id="CriarConta" class="modal">
     <header class="bar bar-nav">
-        <h1 class="title">Amigos</h1>
+      <a class="icon icon-close pull-right" href="#CriarConta"></a>
+      <h1 class="title">WHERE</h1>
     </header>
+    <div class="content">
+      <form>
+        <input type="text" placeholder="Nome" name='nome'>
+        <input type="text" placeholder="Email" name='email'>
+        <input type="text" placeholder="Senha" name='senha'>
+        <textarea rows="5" placeholder="Explique-nos o porque de estar baixando o WHERE, não é obrigatório, apenas teremos mais maneira de te ajudar :)"></textarea>
+        <button class="btn btn-positive btn-block" onclick="alert('Celular cadastrado com sucesso!');">Cadastrar</button>
+      </form>
+    </div>
+  </div>
 
-
-    <footer>
-        <nav class="bar bar-tab">
-            <a class="tab-item active" href="index.html">
-                <span class="icon icon-home"></span>
-                <span class="tab-label">Home</span>
-            </a>
-            <a class="tab-item" href="listar.html">
-                <span class="icon icon-person"></span>
-                <span class="tab-label">Listar</span>
-            </a>
-            <a class="tab-item" href="cadastrar.html">
-                <span class="icon icon-star-filled"></span>
-                <span class="tab-label">Cadastrar</span>
-            </a>
-            
-        </nav>
-    </footer>
-    <script src="jquery/jquery.min.js"></script>
 </body>
 
 </html>
+<script src="jquery/jquery.min.js"></script>
+<script src="ratchet-v2.0.2/js/ratchet.min.js">
+
+</script>
