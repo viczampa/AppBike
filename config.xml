@@ -2,7 +2,7 @@
 <widget id="com.henryzampa.appbike" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Where App</name>
     <description>
-        Hello World sample application that responds to the deviceready event.
+        Where Maps APP
     </description>
     <author email="vic.zampa@hotmail.com">
         Henrique Borsatto de Campos e Victor Zampieri Marinho
