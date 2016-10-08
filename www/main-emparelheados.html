@@ -7,36 +7,42 @@
 </head>
 
 <body>
-    <header class="bar bar-nav">
-        <h1 class="title">Amigos</h1>
-    </header>
     <section>
-        <div style="margin-top:50px;">
+        <div>
             <ul class="table-view">
+              <!-- setarMapa('necessita de dados da localizacao atual do celular que fizemos a requisição') -->
                 <li class="table-view-cell" onclick="setarMapa('Rua: Rua Catequese, 1085')">
                     <a class="navigate-right">
-                    Zina da Silva
+                    Celular 1 - FREE
                     </a>
+                    <div class="toggle">
+     <div class="toggle-handle"></div>
+   </div>
                 </li>
                 <li class="table-view-cell" onclick="setarMapa('Rua: Rua Bom Sucesso, 1378')">
                     <a class="navigate-right">
-                Anderson Silva
+                Celular 2 - liberado com conta premium
                 </a>
+                <div class="toggle active">
+      <div class="toggle-handle"></div>
+    </div>
                 </li>
                 <li class="table-view-cell" onclick="setarMapa('Rua: Rua Augusta, 86')">
                     <a class="navigate-right">
-                    Bozina da Silva
+                    Celular 3 - liberado com conta premium
                     </a>
+                    <div class="toggle active">
+                      <div class="toggle-handle"></div></div>
                 </li>
             </ul>
 
-            <div id="mapa" style="border: 1px solid black; width: 100%; height: 200px">
+            <div id="mapa" style="border: 1px solid black; width: 100%; height: 100%;">
 
             </div>
         </div>
     </section>
 
-    <footer>  
+    <footer>
         <nav class="bar bar-tab">
             <a class="tab-item" href="index.html">
                 <span class="icon icon-home"></span>

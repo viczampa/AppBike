@@ -9,6 +9,7 @@
 <body>
 <div id="blockButtonsInDevice">
   <a href="#CriarConta" class=""><button name="button" class="btn btn-primary btn-block btn-outlined">Criar uma conta no WHERE</button></a>
+  <a href="#Emparelhar" class=""><button name="button" class="btn btn-primary btn-block btn-outlined">Emparelhar</button></a>
 </div>
 
   <div id="CriarConta" class="modal">
@@ -26,6 +27,20 @@
       </form>
     </div>
   </div>
+
+  <div id="Emparelhar" class="modal">
+    <header class="bar bar-nav">
+      <a class="icon icon-close pull-right" href="#Emparelhar"></a>
+      <h1 class="title">WHERE</h1>
+    </header>
+    <div class="content">
+      <input type="text" placeholder="Número de celular que deseja emparelhar" name='destinoTelefone'>
+      <!-- ira enviar requisição para outro celular aceitar ser localizado pelo outro -->
+      <button class="btn btn-positive btn-block" onclick="">Enviar</button>
+    </div>
+  </div>
+
+
 
 </body>
 
