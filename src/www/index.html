@@ -24,14 +24,12 @@
           <a class="icon icon-close pull-right" href="#CriarConta"></a>
         </header>
         <div class="content">
-
             <input type="text" placeholder="Nome" name='nome'>
             <input type="text" placeholder="Email" name='email'>
             <input type="text" placeholder="Senha" name='senha'>
             <textarea rows="5" placeholder="Explique-nos o porque de estar baixando o WHERE, não é obrigatório, apenas teremos mais maneira de te ajudar :)"></textarea>
             <button class="btn btn-positive btn-block" onclick="alert('Celular cadastrado com sucesso!');">Cadastrar</button>
-
-        </div>
+          </div>
       </div>
 
 
@@ -45,7 +43,7 @@
 <script type="text/javascript">
   //verifica login
   $.ajaxSetup({
-    url: "login.php",
+    url: "http://pepperdrinks.smserver.com.br/app/src/public_html/login.php",
     cache:false,
     dataType: "json",
     type: "POST"
@@ -55,11 +53,15 @@
     $('#mask').toggleClass('show');
     $.ajax({
       success:function(data){
-		// $('#mask').toggleClass('show');
-        // window.location.href = 'menu-principal.html';
+	      // $('#mask').toggleClass('show');
+        if(data.result === true){
+          window.location.href = 'menu-principal.html';
+        }else{
+          alert(data.message);
+          $('#mask').toggleClass('show');
+        }
       },
-
-      data: {
+      data : {
               user : $('#user').val(),
               senha : $('#senha').val()
             }
