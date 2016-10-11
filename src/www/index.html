@@ -1,70 +1,111 @@
 <html>
-<meta charset='utf-8'>
-<head>
-    <title></title>
-    <link rel="stylesheet" href="ratchet-v2.0.2/css/ratchet.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-  <div id="mask"><div id="loader"></div></div>
-      <div>
-        <input type="text" placeholder="Usuário" name='user' id='user'>
-        <input type="text" placeholder="Senha" name='senha' id='senha'>
-        <button class="btn btn-positive btn-block" id='loginBtn'>Login</button>
-        <div class="toggle active">
-          <div class="toggle-handle"></div>
-        </div>
-      </div>
-    <div id="blockButtonsInDevice">
-      <a href="#CriarConta" class="">Criar uma conta no WHERE</a>
-    </div>
-      <div id="CriarConta" class="modal">
-        <header class="bar bar-nav">
-          <a class="icon icon-close pull-right" href="#CriarConta"></a>
-        </header>
-        <div class="content">
-            <input type="text" placeholder="Nome" name='nome'>
-            <input type="text" placeholder="Email" name='email'>
-            <input type="text" placeholder="Senha" name='senha'>
-            <textarea rows="5" placeholder="Explique-nos o porque de estar baixando o WHERE, não é obrigatório, apenas teremos mais maneira de te ajudar :)"></textarea>
-            <button class="btn btn-positive btn-block" onclick="alert('Celular cadastrado com sucesso!');">Cadastrar</button>
-          </div>
-      </div>
-
-
-
-</body>
-
+	<head>
+		<meta charset='utf-8' />
+		<title>Menu Principal</title>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="ratchet-v2.0.2/css/ratchet.min.css" />
+		<link rel="stylesheet" href="style.css" />
+		<script src="jquery/jquery.min.js"></script>
+		<script src="global.js"></script>
+		<script src="ratchet-v2.0.2/js/ratchet.min.js"></script>
+	</head>
+	<body>
+		<!--<header class="bar bar-nav">
+			<h1 class="title">Menu Principal</h1>
+			</header>-->
+		<div class="content">
+			<form id="Login" class="content-padded">
+				<h1 class="txt-center content-padded">Faça Seu Login</h1>
+				<input type="text" placeholder="Usuário" name='user' id='user'>
+				<input type="password" placeholder="Senha" name='senha' id='senha'>
+				<button class="btn btn-positive btn-block" type="button" id='loginBtn'>Login</button>
+				<ul class="table-view">
+					<li class="table-view-cell">
+						<label>Lembrar login?</label>
+						<div class="toggle active" id="lembrarLogin">
+							<div class="toggle-handle"></div>
+						</div>
+					</li>
+				</ul>
+				<a href="#CriarConta" class="">Criar uma conta no WHERE</a>
+			</form>
+			<div id="CriarConta" class="modal">
+				<header class="bar bar-nav">
+					<a class="icon icon-close pull-right" href="#CriarConta"></a>
+				</header>
+				<div class="content">
+					<input type="text" placeholder="Nome" name='nome'>
+					<input type="text" placeholder="Email" name='email'>
+					<input type="text" placeholder="Senha" name='senha'>
+					<textarea rows="5" placeholder="Explique-nos o porque de estar baixando o WHERE, não é obrigatório, apenas teremos mais maneira de te ajudar :)"></textarea>
+					<button class="btn btn-positive btn-block" onclick="alert('Celular cadastrado com sucesso!');">Cadastrar</button>
+				</div>
+			</div>
+		</div>
+		<div id="mask">
+			<div id="loader"></div>
+		</div>
+		<script type="text/javascript">
+			$(document).ready(function()
+			{
+				var user_i = $('#user');
+				var senha_i = $('#senha');
+				var lembra_login = $('#lembrarLogin');
+				
+				$('#loginBtn').click(function()
+				{
+					toggleMask();
+					$.ajax(
+					{
+						url: basePepUrl + "login.php",
+						data:
+						{
+							user : $('#user').val(),
+							senha : $('#senha').val()
+						},
+						success: function OnAjaxSuccess(data, textStatus, jqXHR)
+						{
+							if(data.result === true)
+							{
+								if($('#lembrarLogin').hasClass('active') === true)
+								{
+									localStorage.setItem('login_usr', $('#user').val());
+									localStorage.setItem('login_pwd', $('#senha').val());
+								}
+								else
+								{
+									localStorage.removeItem('login_usr');
+									localStorage.removeItem('login_pwd');
+								}
+								window.location.href = 'menu-principal.html';
+							}
+							else
+							{
+								alert(data.message);
+							}
+						},
+						error: function OnAjaxError(jqXHR, textStatus, errorThrown)
+						{
+							console.log(jqXHR, textStatus, errorThrown);
+						},
+						complete: function OnAjaxComplete(jqXHR, textStatus)
+						{
+							toggleMask();
+						}
+					});
+				});
+				
+				user_i.val(localStorage.getItem('login_usr'));
+				senha_i.val(localStorage.getItem('login_pwd'));
+				
+				if(user_i.val() && senha_i.val())
+				{
+					// Faz login automático
+					// $('#loginBtn').click();
+				}
+			});
+		</script>
+	</body>
 </html>
-<script src="jquery/jquery.min.js"></script>
-<script src="ratchet-v2.0.2/js/ratchet.min.js"></script>
-
-<script type="text/javascript">
-  //verifica login
-  $.ajaxSetup({
-    url: "http://pepperdrinks.smserver.com.br/app/src/public_html/login.php",
-    cache:false,
-    dataType: "json",
-    type: "POST"
-  });
-
-  $('#loginBtn').click(function(){
-    $('#mask').toggleClass('show');
-    $.ajax({
-      success:function(data){
-	      // $('#mask').toggleClass('show');
-        if(data.result === true){
-          window.location.href = 'menu-principal.html';
-        }else{
-          alert(data.message);
-          $('#mask').toggleClass('show');
-        }
-      },
-      data : {
-              user : $('#user').val(),
-              senha : $('#senha').val()
-            }
-    });
-  });
-</script>

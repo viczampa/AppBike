@@ -1,3 +1,17 @@
+/* Geral */
+.txt-center
+{
+	text-align: center;
+}
+
+/* Overrides */
+span.toggle
+{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+/* Mask */
 #mask
 {
 	background-color:rgba(0, 0, 0, 0.7);
@@ -13,7 +27,6 @@
 	opacity: 0;
 	transition: opacity 0.5s;
 }
-
 #mask.show
 {
 	opacity: 1;
@@ -21,7 +34,6 @@
 	height: 100%;
 	overflow: visible;
 }
-
 #loader
 {
 	background-image:url(hourglass.gif);
