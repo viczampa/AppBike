@@ -135,8 +135,8 @@ window.basePepUrl = 'http://pepperdrinks.smserver.com.br/app/src/public_html/';
 				{
 					if(data.result === true)
 					{
-						alert(data.message);
-						localStorage.removeItem('login_usr');
+						// alert(data.message);
+						localStorage.removeItem('login_pwd');
 						window.location.href = 'index.html';
 					}
 					else
