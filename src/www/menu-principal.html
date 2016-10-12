@@ -1,59 +1,51 @@
+<!DOCTYPE html>
 <html>
-<meta charset='utf-8'>
-<head>
-    <title></title>
-    <link rel="stylesheet" href="ratchet-v2.0.2/css/ratchet.min.css">
-
-</head>
-
-<body>
-<div id="blockButtonsInDevice">
-  <a href="javascript:void(0)" class="logout-handler"><button name="button" class="btn btn-primary btn-block btn-outlined">Sair</button></a>
-  <a href="#Emparelhar" class=""><button name="button" class="btn btn-primary btn-block btn-outlined">Emparelhar</button></a>
-  <a href="#MainEmparelhados" class=""><button name="button" class="btn btn-primary btn-block btn-outlined">Mostrar localização de celulares</button></a>
-</div>
-
-  <div id="CriarConta" class="modal">
-    <header class="bar bar-nav">
-      <a class="icon icon-close pull-right" href="#CriarConta"></a>
-    </header>
-    <div class="content">
-      <form>
-        <input type="text" placeholder="Nome" name='nome'>
-        <input type="text" placeholder="Email" name='email'>
-        <input type="text" placeholder="Senha" name='senha'>
-        <textarea rows="5" placeholder="Explique-nos o porque de estar baixando o WHERE, não é obrigatório, apenas teremos mais maneira de te ajudar :)"></textarea>
-        <button class="btn btn-positive btn-block" onclick="alert('Celular cadastrado com sucesso!');">Cadastrar</button>
-      </form>
-    </div>
-  </div>
-
-  <div id="Emparelhar" class="modal">
-    <header class="bar bar-nav">
-      <a class="icon icon-close pull-right" href="#Emparelhar"></a>
-    </header>
-    <div class="content">
-      <input type="text" placeholder="Número de celular que deseja emparelhar" name='destinoTelefone'>
-      <!-- ira enviar requisição para outro celular aceitar ser localizado pelo outro -->
-      <button class="btn btn-positive btn-block" onclick="">Enviar</button>
-    </div>
-  </div>
-
-  <div id="MainEmparelhados" class="modal">
-    <header class="bar bar-nav">
-      <a class="icon icon-close pull-right" href="#MainEmparelhados"></a>
-    </header>
-    <div class="content">
-    <iframe src="main-emparelhados.html" style="width:100%; height:100%;"></iframe>
-    </div>
-  </div>
-
-
-
-</body>
-
+	<meta charset='utf-8'>
+	<head>
+		<meta charset='utf-8' />
+		<title>Menu Principal</title>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="ratchet-v2.0.2/css/ratchet.min.css" />
+		<link rel="stylesheet" href="custom/style.css" />
+		<script src="jquery/jquery.min.js"></script>
+		<script src="custom/global.js"></script>
+		<script src="ratchet-v2.0.2/js/ratchet.min.js"></script>
+	</head>
+	<body>
+		<!--<header class="bar bar-nav">
+			<h1 class="title">Menu Principal</h1>
+			</header>-->
+		<div class="content">
+			<div>
+				<button type="button" class="logout-onclick btn btn-primary btn-block btn-outlined">Sair</button></a>
+				<a href="#Emparelhar" class=""><button type="button" class="btn btn-primary btn-block btn-outlined">Emparelhar</button></a>
+				<a href="#MainEmparelhados" class=""><button type="button" class="btn btn-primary btn-block btn-outlined">Mostrar localização de celulares</button></a>
+			</div>
+			<div id="Emparelhar" class="modal">
+				<header class="bar bar-nav">
+					<a class="icon icon-close pull-right" href="#Emparelhar"></a>
+				</header>
+				<div class="content">
+					<input type="text" placeholder="Número de celular que deseja emparelhar" name='destinoTelefone'>
+					<!-- ira enviar requisição para outro celular aceitar ser localizado pelo outro -->
+					<button class="btn btn-positive btn-block" onclick="">Enviar</button>
+				</div>
+			</div>
+			<div id="MainEmparelhados" class="modal">
+				<header class="bar bar-nav">
+					<a class="icon icon-close pull-right" href="#MainEmparelhados"></a>
+				</header>
+				<div class="content">
+					<iframe src="main-emparelhados.html" style="width:100%; height:100%;"></iframe>
+				</div>
+			</div>
+		</div>
+		<div id="mask">
+			<div id="loader"></div>
+		</div>
+	</body>
 </html>
 <script src="jquery/jquery.min.js"></script>
-<script src="ratchet-v2.0.2/js/ratchet.min.js">
-
-</script>
+<script src="ratchet-v2.0.2/js/ratchet.min.js"></script>

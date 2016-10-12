@@ -4,6 +4,36 @@
 	text-align: center;
 }
 
+.page-title
+{
+	padding: 0.5em;
+	font-family: 'Helvetica';
+	text-align: center;
+}
+
+.txt-black
+{
+    color: black;
+    text-decoration: underline;
+}
+
+.txt-white
+{
+    color: white;
+    text-decoration: underline;
+}
+
+.bg-grad
+{
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f4fdff+0,b6ccef+100 */
+	background: linear-gradient(to bottom, #006fff 0%,#13396b 50%,#000000 100%);
+}
+
+.bg-trans
+{
+	background: transparent;
+}
+
 /* Overrides */
 span.toggle
 {
