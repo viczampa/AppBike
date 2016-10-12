@@ -116,7 +116,12 @@ window.basePepUrl = 'http://pepperdrinks.smserver.com.br/app/src/public_html/';
 		dataType: "json",
 		type: "POST",
 		async: true,
-		timeout: 10000
+		timeout: 10000,
+		// CORS transmissao de Cookies
+		xhrFields:
+		{
+			withCredentials: true
+		}
 	});
 	
 	$(document).ready(function()
