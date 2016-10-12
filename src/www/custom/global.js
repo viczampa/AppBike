@@ -41,7 +41,34 @@
 			push.on('registration', function(data)
 			{
 				// data.registrationId
-				
+				$.ajax(
+				{
+					url: basePepUrl + "push_reg.php",
+					data:
+					{
+						regid: data.registrationId
+					},
+					success: function OnAjaxSuccess(data, textStatus, jqXHR)
+					{
+						console.log(data, textStatus, jqXHR);
+						if(data.result === true)
+						{
+							
+						}
+						else
+						{
+							
+						}
+					},
+					error: function OnAjaxError(jqXHR, textStatus, errorThrown)
+					{
+						console.log(jqXHR, textStatus, errorThrown);
+					},
+					complete: function OnAjaxComplete(jqXHR, textStatus)
+					{
+						console.log(jqXHR, textStatus, errorThrown);
+					}
+				});
 			});
 			push.on('notification', function(data)
 			{
