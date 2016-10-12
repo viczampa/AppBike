@@ -1,3 +1,5 @@
+window.basePepUrl = 'http://pepperdrinks.smserver.com.br/app/src/public_html/';
+
 (function($)
 {
 	$.getScript( "https://www.gstatic.com/firebasejs/3.4.1/firebase.js", function(data, textStatus, jqxhr)
@@ -18,6 +20,7 @@
 	
 	document.addEventListener("deviceready", function()
 	{
+		alert("deviceready");
 		if(PushNotification in window)
 		{
 			var push = PushNotification.init(
@@ -84,6 +87,10 @@
 				// e.message
 			});
 		}
+		else
+		{
+			alert('Indisponivel');
+		}
 	});
 
 	$(document).ready(function()
@@ -111,8 +118,6 @@
 		async: true,
 		timeout: 10000
 	});
-
-	window.basePepUrl = 'http://pepperdrinks.smserver.com.br/app/src/public_html/';
 	
 	$(document).ready(function()
 	{
