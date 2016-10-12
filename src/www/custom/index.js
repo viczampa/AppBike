@@ -12,9 +12,9 @@ $(document).ready(function()
 			url: basePepUrl + "cadastro.php",
 			data:
 			{
-				email : $('#email').val(),
-				senha : $('#senha').val(),
-				nome : $('#nome').val()
+				email : $('#cad_email').val(),
+				senha : $('#cad_senha').val(),
+				nome : $('#cad_nome').val()
 			},
 			success: function OnAjaxSuccess(data, textStatus, jqXHR)
 			{
@@ -46,14 +46,14 @@ $(document).ready(function()
 			url: basePepUrl + "login.php",
 			data:
 			{
-				user : $('#user').val(),
-				senha : $('#senha').val()
+				user : user_i.val(),
+				senha : senha_i.val()
 			},
 			success: function OnAjaxSuccess(data, textStatus, jqXHR)
 			{
 				if(data.result === true)
 				{
-					if($('#lembrarLogin').hasClass('active') === true)
+					if(lembra_login.hasClass('active') === true)
 					{
 						localStorage.setItem('login_usr', $('#user').val());
 						localStorage.setItem('login_pwd', $('#senha').val());

@@ -14,9 +14,9 @@
 		<script src="ratchet-v2.0.2/js/ratchet.min.js"></script>
 	</head>
 	<body>
-		<!--<header class="bar bar-nav">
+		<header class="bar bar-nav">
 			<h1 class="title">Menu Principal</h1>
-			</header>-->
+			</header>
 		<div class="content">
 			<div>
 				<button type="button" class="logout-onclick btn btn-primary btn-block btn-outlined">Sair</button></a>
@@ -28,9 +28,9 @@
 					<a class="icon icon-close pull-right" href="#Emparelhar"></a>
 				</header>
 				<div class="content">
-					<input type="text" placeholder="Número de celular que deseja emparelhar" name='destinoTelefone'>
+					<input type="text" placeholder="E-mail que deseja parear" name='email_destino' id='email_destino'>
 					<!-- ira enviar requisição para outro celular aceitar ser localizado pelo outro -->
-					<button class="btn btn-positive btn-block" onclick="">Enviar</button>
+					<button class="btn btn-positive btn-block" id='action-parear'>Enviar</button>
 				</div>
 			</div>
 			<div id="MainEmparelhados" class="modal">
@@ -42,6 +42,7 @@
 				</div>
 			</div>
 		</div>
+		<script src="custom/menu-principal.js" type="text/javascript"></script>
 		<div id="mask">
 			<div id="loader"></div>
 		</div>
