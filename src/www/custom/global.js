@@ -21,7 +21,7 @@ window.basePepUrl = 'http://pepperdrinks.smserver.com.br/app/src/public_html/';
 	document.addEventListener("deviceready", function()
 	{
 		alert("deviceready");
-		if(PushNotification in window)
+		if(window.PushNotification)
 		{
 			var push = PushNotification.init(
 			{
