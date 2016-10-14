@@ -1,4 +1,21 @@
-window.basePepUrl = 'http://pepperdrinks.smserver.com.br/app/src/public_html/';
+// window.basePepUrl = 'http://pepperdrinks.smserver.com.br/app/src/public_html/';
+window.basePepUrl = 'http://localhost:80/AppBikeServer/src/public_html/';
+
+$.ajaxSetup(
+{
+	cache: false,
+	dataType: "json",
+	method:"POST",
+	jsonp: false,
+	type: "POST",
+	async: true,
+	timeout: 10000,
+	// CORS transmissao de Cookies
+	xhrFields:
+	{
+		withCredentials: true
+	}
+});
 
 document.addEventListener("deviceready", function()
 {
@@ -39,11 +56,11 @@ document.addEventListener("deviceready", function()
 					console.log(data, textStatus, jqXHR);
 					if(data.result === true)
 					{
-						
+
 					}
 					else
 					{
-						
+
 					}
 				},
 				error: function OnAjaxError(jqXHR, textStatus, errorThrown)
@@ -52,7 +69,7 @@ document.addEventListener("deviceready", function()
 				},
 				complete: function OnAjaxComplete(jqXHR, textStatus)
 				{
-					console.log(jqXHR, textStatus, errorThrown);
+					console.log(jqXHR, textStatus);
 				}
 			});
 		});
@@ -113,20 +130,8 @@ document.addEventListener("deviceready", function()
 		}
 	});
 
-	$.ajaxSetup(
-	{
-		cache: false,
-		dataType: "json",
-		type: "POST",
-		async: true,
-		timeout: 10000,
-		// CORS transmissao de Cookies
-		xhrFields:
-		{
-			withCredentials: true
-		}
-	});
-	
+
+
 	$(document).ready(function()
 	{
 		$('.logout-onclick').on('click', function(event)
@@ -137,7 +142,7 @@ document.addEventListener("deviceready", function()
 				url: basePepUrl + "logout.php",
 				data:
 				{
-					
+
 				},
 				success: function OnAjaxSuccess(data, textStatus, jqXHR)
 				{

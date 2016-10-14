@@ -25,8 +25,13 @@
 
 .bg-grad
 {
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f4fdff+0,b6ccef+100 */
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f4fdff+0,b6ccef+100
 	background: linear-gradient(to bottom, #006fff 0%,#13396b 50%,#000000 100%);
+	*/
+	background-image: url(https://visualhunt.com/photos/l/1/girlfriends-standing-on-bridge.jpg);
+	background-size: 942px;
+	background-repeat: no-repeat;
+	background-position: -300px -50px;
 }
 
 .bg-trans

@@ -15,45 +15,16 @@
 	<body>
 		<section>
 			<div>
-				<ul class="table-view">
+				<ul class="table-view" id="lista">
 				<!-- setarMapa('necessita de dados da localizacao atual do celular que fizemos a requisição') -->
-				<li class="table-view-cell" onclick="setarMapa('Rua: Rua Catequese, 1085')">
-					<a class="navigate-right">
-					Celular 1 - 991634788
-					</a>
-				</li>
+				</ul>
 			</div>
 			<div id="mapa" style="border: 1px solid black; width: 100%; height: 100%;">
 			</div>
 			</div>
 		</section>
-		<script src="jquery/jquery.min.js"></script>
-		<script src="http://maps.google.com/maps/api/js?key=AIzaSyAuluPsAq2Ut03FE08jKRqTIy5JGlC0fUE "></script>
-		<script>
-			function setarMapa(rua){
-			    var localizador = new google.maps.Geocoder();
-			    localizador.geocode({"address":rua},function(registro,status){
-			        if(status == google.maps.GeocoderStatus.OK){
-			            var lat = registro[0].geometry.location.lat();
-			            var long = registro[0].geometry.location.lng();
-			
-			            var configuracoes = {
-			                zoom:17,
-			                center: new google.maps.LatLng(lat,long),
-			                mapTypeId: google.maps.MapTypeId.ROADMAP
-			            };
-			
-			
-			            var mapa = new google.maps.Map($("#mapa").get(0), configuracoes);
-			        }
-			    });
-			    //possui animation
-			    new google.maps.Marker({
-			        map: mapa,
-			        position: new google.maps.LatLng(lat,long)
-			    });
-			}
-		</script>
+		<script src="http://maps.google.com/maps/api/js?key=AIzaSyAuluPsAq2Ut03FE08jKRqTIy5JGlC0fUE"></script>
+		<script src="custom/main-emparelhados.js"></script>
 		<div id="mask">
 			<div id="loader"></div>
 		</div>
