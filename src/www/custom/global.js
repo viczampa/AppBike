@@ -1,5 +1,83 @@
 window.basePepUrl = 'http://pepperdrinks.smserver.com.br/app/src/public_html/';
 
+document.addEventListener("deviceready", function()
+{
+	alert("deviceready");
+	if(window.PushNotification)
+	{
+		var push = PushNotification.init(
+		{
+			android:
+			{
+				senderID: "172245467834"
+			},
+			browser:
+			{
+				// pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+			},
+			ios:
+			{
+				alert: "true",
+				badge: "true",
+				sound: "true"
+			},
+			windows: {}
+		});
+		push.on('registration', function(data)
+		{
+			// data.registrationId
+			alert("Push registrado! \n\n OBJ: " + JSON.stringify(data));
+			$.ajax(
+			{
+				url: basePepUrl + "push_reg.php",
+				data:
+				{
+					regid: data.registrationId
+				},
+				success: function OnAjaxSuccess(data, textStatus, jqXHR)
+				{
+					console.log(data, textStatus, jqXHR);
+					if(data.result === true)
+					{
+						
+					}
+					else
+					{
+						
+					}
+				},
+				error: function OnAjaxError(jqXHR, textStatus, errorThrown)
+				{
+					console.log(jqXHR, textStatus, errorThrown);
+				},
+				complete: function OnAjaxComplete(jqXHR, textStatus)
+				{
+					console.log(jqXHR, textStatus, errorThrown);
+				}
+			});
+		});
+		push.on('notification', function(data)
+		{
+			// data.message,
+			// data.title,
+			// data.count,
+			// data.sound,
+			// data.image,
+			// data.additionalData
+			alert("Push recebido! \n\n OBJ: " + JSON.stringify(data));
+		});
+		push.on('error', function(e)
+		{
+			// e.message
+			alert("Push error! \n\n OBJ: " + JSON.stringify(e));
+		});
+	}
+	else
+	{
+		alert('Indisponivel');
+	}
+});
+
 (function($)
 {
 	$.getScript( "https://www.gstatic.com/firebasejs/3.4.1/firebase.js", function(data, textStatus, jqxhr)
@@ -16,81 +94,6 @@ window.basePepUrl = 'http://pepperdrinks.smserver.com.br/app/src/public_html/';
 			};
 			firebase.initializeApp(config);
 		}, 5);
-	});
-	
-	document.addEventListener("deviceready", function()
-	{
-		alert("deviceready");
-		if(window.PushNotification)
-		{
-			var push = PushNotification.init(
-			{
-				android:
-				{
-					senderID: "172245467834"
-				},
-				browser:
-				{
-					// pushServiceURL: 'http://push.api.phonegap.com/v1/push'
-				},
-				ios:
-				{
-					alert: "true",
-					badge: "true",
-					sound: "true"
-				},
-				windows: {}
-			});
-			push.on('registration', function(data)
-			{
-				// data.registrationId
-				$.ajax(
-				{
-					url: basePepUrl + "push_reg.php",
-					data:
-					{
-						regid: data.registrationId
-					},
-					success: function OnAjaxSuccess(data, textStatus, jqXHR)
-					{
-						console.log(data, textStatus, jqXHR);
-						if(data.result === true)
-						{
-							
-						}
-						else
-						{
-							
-						}
-					},
-					error: function OnAjaxError(jqXHR, textStatus, errorThrown)
-					{
-						console.log(jqXHR, textStatus, errorThrown);
-					},
-					complete: function OnAjaxComplete(jqXHR, textStatus)
-					{
-						console.log(jqXHR, textStatus, errorThrown);
-					}
-				});
-			});
-			push.on('notification', function(data)
-			{
-				// data.message,
-				// data.title,
-				// data.count,
-				// data.sound,
-				// data.image,
-				// data.additionalData
-			});
-			push.on('error', function(e)
-			{
-				// e.message
-			});
-		}
-		else
-		{
-			alert('Indisponivel');
-		}
 	});
 
 	$(document).ready(function()
