@@ -3,29 +3,22 @@
 	<head>
 		<meta charset='utf-8' />
 		<title>Menu Principal</title>
-		<meta name="viewport" content="initial-scale=1, maximum-scale=1">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<link rel="stylesheet" href="ratchet-v2.0.2/css/ratchet.min.css" />
-		<link rel="stylesheet" href="custom/style.css" />
-		<script src="jquery/jquery.min.js"></script>
-		<script src="custom/global.js"></script>
-		<script src="ratchet-v2.0.2/js/ratchet.min.js"></script>
 	</head>
 	<body>
-		<header class="bar bar-nav">
+		<nav class="bar bar-nav">
 			<button class="btn pull-left btn-negative logout-onclick" type="button">Logout</button>
 			<h1 class="title">Menu Principal</h1>
-		</header>
+		</nav>
 		<div class="content">
+			<script src="custom/menu-principal.js" type="text/javascript"></script>
 			<div class="content-padded">
 				<a href="#Emparelhar" class=""><button type="button" class="btn btn-primary btn-block btn-outlined">Emparelhar</button></a>
 				<a href="#MainEmparelhados" class=""><button type="button" class="btn btn-primary btn-block btn-outlined">Mostrar localização de celulares</button></a>
 			</div>
 			<div id="Emparelhar" class="modal">
-				<header class="bar bar-nav">
+				<nav class="bar bar-nav">
 					<a class="icon icon-close pull-right" href="#Emparelhar"></a>
-				</header>
+				</nav>
 				<div class="content">
 					<input type="text" placeholder="E-mail que deseja parear" name='email_destino' id='email_destino'>
 					<!-- ira enviar requisição para outro celular aceitar ser localizado pelo outro -->
@@ -33,25 +26,19 @@
 				</div>
 			</div>
 		</div>
-		<footer>
-			<nav class="bar bar-tab">
-				<a class="tab-item active" href="index.html" data-transition="fade">
-					<span class="icon icon-home"></span>
-					<span class="tab-label">Home</span>
-				</a>
-				<a class="tab-item" href="main-emparelhados.html" data-transition="fade">
-					<span class="icon icon-person"></span>
-					<span class="tab-label">Pareados</span>
-				</a>
-				<a class="tab-item" href="cadastrar.html" data-transition="fade">
-					<span class="icon icon-star-filled"></span>
-					<span class="tab-label">Cadastrar</span>
-				</a>
-			</nav>
-		</footer>
-		<script src="custom/menu-principal.js" type="text/javascript"></script>
-		<div id="mask">
-			<div id="loader"></div>
-		</div>
+		<nav class="bar bar-tab">
+			<a class="tab-item active" href="menu-principal.html" data-transition="slide-in">
+				<span class="icon icon-home"></span>
+				<span class="tab-label">Home</span>
+			</a>
+			<a class="tab-item" href="main-emparelhados.html" data-transition="slide-in">
+				<span class="icon icon-person"></span>
+				<span class="tab-label">Pareados</span>
+			</a>
+			<a class="tab-item" href="cadastrar.html" data-transition="slide-in">
+				<span class="icon icon-star-filled"></span>
+				<span class="tab-label">Cadastrar</span>
+			</a>
+		</nav>
 	</body>
 </html>

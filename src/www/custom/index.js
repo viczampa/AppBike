@@ -63,7 +63,7 @@ $(document).ready(function()
 						localStorage.removeItem('login_usr');
 						localStorage.removeItem('login_pwd');
 					}
-					window.location.href = 'menu-principal.html';
+					PUSH({url: 'menu-principal.html', transition: 'slide-in'});
 				}
 				else
 				{
