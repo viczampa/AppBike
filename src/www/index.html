@@ -14,11 +14,11 @@
 	</head>
 	<body>
 		<!--<header class="bar bar-nav">
-			<h1 class="title">Title Principal</h1>
+			<h1 class="title">Login</h1>
 		</header>-->
-		<div class="content bg-grad">
+		<div class="content bg-log">
 			<form id="Login" class="content-padded">
-				<h1 class="page-title content-padded">Faça Seu Login</h1>
+				<h1 class="page-title content-padded txt-white txt-shadow">Faça Seu Login</h1>
 				<input type="text" placeholder="Usuário" name='user' id='user'/>
 				<input type="password" placeholder="Senha" name='senha' id='senha'/>
 				<button class="btn btn-positive btn-block" type="button" id='loginBtn'>Login</button>
@@ -30,18 +30,21 @@
 						</div>
 					</li>
 				</ul>
-				<a href="#CriarConta" class="txt-white">Criar uma conta no WHERE</a>
+				<span class="txt-white">Ainda não possui uma conta?</span>
+				<a href="#CriarConta"><button class="btn btn-block" type="button">Criar uma conta no WHERE</button></a>
 			</form>
 			<div id="CriarConta" class="modal">
 				<header class="bar bar-nav">
+					<h1 class="title">Criar Conta</h1>
 					<a class="icon icon-close pull-right" href="#CriarConta"></a>
 				</header>
 				<div class="content">
-					<input type="text" placeholder="Nome" id='cad_nome'/>
-					<input type="text" placeholder="Email" id='cad_email'/>
-					<input type="text" placeholder="Senha" id='cad_senha'/>
-					<textarea rows="5" placeholder="Explique-nos o porque de estar baixando o WHERE, não é obrigatório, apenas teremos mais maneira de te ajudar :)"></textarea>
-					<button class="btn btn-positive btn-block" id='cadastrarBtn'>Cadastrar</button>
+					<form id="CriaCnt" class="content-padded">
+						<input type="text" placeholder="Nome" id='cad_nome'/>
+						<input type="text" placeholder="Email" id='cad_email'/>
+						<input type="text" placeholder="Senha" id='cad_senha'/>
+						<button type="button" class="btn btn-positive btn-block" id='cadastrarBtn'>Cadastrar</button>
+					</form>
 				</div>
 			</div>
 		</div>

@@ -13,17 +13,34 @@
 		<script src="ratchet-v2.0.2/js/ratchet.min.js"></script>
 	</head>
 	<body>
+		<header class="bar bar-nav">
+			<a class="icon icon-left-nav pull-left" href="menu-principal.html"></a>
+			<h1 class="title">Pareamentos</h1>
+		</header>
+		<script src="http://maps.google.com/maps/api/js?key=AIzaSyAuluPsAq2Ut03FE08jKRqTIy5JGlC0fUE"></script>
 		<section>
 			<div>
 				<ul class="table-view" id="lista">
-				<!-- setarMapa('necessita de dados da localizacao atual do celular que fizemos a requisição') -->
+					
 				</ul>
 			</div>
-			<div id="mapa" style="border: 1px solid black; width: 100%; height: 100%;">
-			</div>
-			</div>
 		</section>
-		<script src="http://maps.google.com/maps/api/js?key=AIzaSyAuluPsAq2Ut03FE08jKRqTIy5JGlC0fUE"></script>
+		<footer>
+			<nav class="bar bar-tab">
+				<a class="tab-item" href="menu-principal.html" data-transition="fade">
+					<span class="icon icon-home"></span>
+					<span class="tab-label">Home</span>
+				</a>
+				<a class="tab-item active" href="main-emparelhados.html" data-transition="fade">
+					<span class="icon icon-person"></span>
+					<span class="tab-label">Pareados</span>
+				</a>
+				<a class="tab-item" href="cadastrar.html" data-transition="fade">
+					<span class="icon icon-star-filled"></span>
+					<span class="tab-label">Cadastrar</span>
+				</a>
+			</nav>
+		</footer>
 		<script src="custom/main-emparelhados.js"></script>
 		<div id="mask">
 			<div id="loader"></div>

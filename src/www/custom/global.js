@@ -1,4 +1,4 @@
-// window.basePepUrl = 'http://pepperdrinks.smserver.com.br/app/src/public_html/';
+window.basePepUrl = 'http://pepperdrinks.smserver.com.br/app/src/public_html/';
 window.basePepUrl = 'http://localhost:80/AppBikeServer/src/public_html/';
 
 $.ajaxSetup(
@@ -115,18 +115,17 @@ document.addEventListener("deviceready", function()
 
 	$(document).ready(function()
 	{
-		var mask = $('#mask');
 		window.showMask = function showMask()
 		{
-			mask.addClass('show');
+			$('#mask').addClass('show');
 		}
 		window.hideMask = function hideMask()
 		{
-			mask.removeClass('show');
+			$('#mask').removeClass('show');
 		}
 		window.toggleMask = function toggleMask()
 		{
-			mask.toggleClass('show');
+			$('#mask').toggleClass('show');
 		}
 	});
 
@@ -134,7 +133,7 @@ document.addEventListener("deviceready", function()
 
 	$(document).ready(function()
 	{
-		$('.logout-onclick').on('click', function(event)
+		$(document).on('click', '.logout-onclick', function(event)
 		{
 			toggleMask();
 			$.ajax(
