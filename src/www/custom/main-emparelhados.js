@@ -10,12 +10,12 @@ $.ajax(
 				{
 					 if(obj.aceito == 0){
 						 $('#lista').append("<li class='table-view-cell' data-id='"+ obj.id +"'>"+
-											"<span class='email'>" + obj.email + "</span>" +
-											"<div>" +
-												"<button class='btn btn-positive emp-aceitar'>Aceitar</button>" +
-												"<button class='btn btn-negative emp-recusar'>Recusar</button>" +
-											"</div>" +
-										"</li>");
+												"<span class='email'>" + obj.email + "</span>" +
+												"<div>" +
+													"<button class='btn btn-positive emp-aceitar'>Aceitar</button>" +
+													"<button class='btn btn-negative emp-recusar'>Recusar</button>" +
+												"</div>" +
+											"</li>");
 					 }else{
 						 $('#lista').append(Constr_Li_Aceito(obj.id, obj.email));
 					 }
@@ -65,13 +65,15 @@ $(document).ready(function()
 	{
 		var id = li.data('id');
 		var email = li.find('.email').text();
+		var had = !!(li.find('.emp-remover').length === 1);
 		$.ajax(
 		{
 			url: basePepUrl + "resp_pareamento.php",
 			data:
 			{
 				id: id,
-				resp: resp
+				resp: resp,
+				had: had
 			},
 			success: function OnAjaxSuccess(data, textStatus, jqXHR)
 			{
