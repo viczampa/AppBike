@@ -27,6 +27,11 @@
 	text-shadow: 0 0 0.25em black, 0 0 0.5em black;
 }
 
+.amz-pendente
+{
+	color: orange;
+}
+
 .bg-log
 {
 	background-image: url('bg-login.jpg');
@@ -51,6 +56,25 @@ span.toggle
 .table-view-divider.txt-center
 {
 	padding-right: 15px;
+}
+
+.table-view-cell.dyna
+{
+	padding-right: 15px;
+}
+
+.dyna > *:last-child
+{
+	display: inline-block;
+	float: right;
+	vertical-align: middle;
+	margin-left: 25px;
+}
+
+.dyna > *:first-child
+{
+	display: inline-block;
+	vertical-align: middle;
 }
 
 /* Mask */

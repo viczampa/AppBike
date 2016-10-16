@@ -17,23 +17,6 @@ $.ajaxSetup(
 	}
 });
 
-window.addEventListener('push', checkPage);
-function checkPage()
-{
-	// Achar os js da página aqui, e rodá-los
-	var scripts = $('.content').find('script');
-	scripts.each(function(index, script)
-	{
-		script = $(script);
-		console.log(script);
-		var orig_src = script.attr('src');
-		$.getScript( orig_src, function(data, textStatus, jqxhr)
-		{
-			// Success
-		});
-	});
-}
-
 document.addEventListener("deviceready", function(event)
 {
 	alert("deviceready");
@@ -162,7 +145,7 @@ $(document).ready(function()
 {
 	$(document).on('click', '.logout-onclick', function(event)
 	{
-		toggleMask();
+		showMask();
 		$.ajax(
 		{
 			url: basePepUrl + "logout.php",
@@ -176,7 +159,7 @@ $(document).ready(function()
 				{
 					// alert(data.message);
 					localStorage.removeItem('login_pwd');
-					PUSH({url: 'index.html', transition: 'slide-out'});
+					PUSHMASK({url: 'index.html', transition: 'slide-out'});
 				}
 				else
 				{
@@ -189,8 +172,82 @@ $(document).ready(function()
 			},
 			complete: function OnAjaxComplete(jqXHR, textStatus)
 			{
-				toggleMask();
+				hideMask();
 			}
 		});
 	});
 });
+
+
+function TogglarBotaoRatchet(botao)
+{
+	var ativo = $(botao).hasClass('active');
+	if(ativo)
+	{
+		$(botao).removeClass('active');
+		$(botao).children().css('transform', '');
+	}
+	else
+	{
+		$(botao).addClass('active');
+	}
+}
+
+
+
+
+function smallTimeout(func)
+{
+	window.setTimeout(func, 10);
+}
+
+
+function PUSHMASK(push_opt)
+{
+	showMask();
+	$(window).one('push', function(){ hideMask(); })
+	PUSH(push_opt);
+}
+
+
+
+function instantTimeout(func)
+{
+	window.setTimeout(func, 0);
+}
+
+
+
+$.fn.prettyDel = function prettyDel(color, time)
+{
+	color = color || 'red';
+	time = time || 400;
+	var item = $(this);
+	item.css('background-color', color);
+	item.css('overflow', 'hidden');
+	item.animate({ 'background-color': 'transparent', 'opacity': '0', 'height': '0' }, { duration: time, queue: false, always: function(){ item.remove(); } } );
+}
+
+
+
+
+// Evento de navegação pela PUSH
+function checkPage()
+{
+	// Achar os js da página aqui, e rodá-los
+	var scripts = $('.content').find('script');
+	scripts.each(function(index, script)
+	{
+		script = $(script);
+		var orig_src = script.attr('src');
+		$.getScript( orig_src, function(data, textStatus, jqxhr)
+		{
+			// Success, pegou o script e está rodando/rodou
+		});
+	});
+	// Attach novamente
+	$(window).one('push', checkPage);
+}
+
+// Manualmente chamar evento PUSH inicial
+checkPage();
