@@ -21,7 +21,6 @@ window.addEventListener('push', checkPage);
 function checkPage()
 {
 	// Achar os js da página aqui, e rodá-los
-	console.log('PUSH emitido');
 	var scripts = $('.content').find('script');
 	scripts.each(function(index, script)
 	{

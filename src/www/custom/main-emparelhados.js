@@ -87,6 +87,7 @@ $(document).ready(function()
 		var email = li.find('.email').text();
 		var had = !!(li.find('.emp-remover').length === 1); // had = remover existente?
 		var rastreado = !!(li.closest('#listaRastreados').length === 1); // o alvo é um rastreado?
+		console.log('ID ' + id + " rastreado: ", rastreado);
 		$.ajax(
 		{
 			url: basePepUrl + "resp_pareamento.php",
