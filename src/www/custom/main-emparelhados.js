@@ -8,17 +8,27 @@ $.ajax(
 			{
 				$.each(data.data,function(index,obj)
 				{
-					 if(obj.aceito == 0){
-						 $('#lista').append("<li class='table-view-cell' data-id='"+ obj.id +"'>"+
-												"<span class='email'>" + obj.email + "</span>" +
-												"<div>" +
-													"<button class='btn btn-positive emp-aceitar'>Aceitar</button>" +
-													"<button class='btn btn-negative emp-recusar'>Recusar</button>" +
-												"</div>" +
-											"</li>");
-					 }else{
-						 $('#lista').append(Constr_Li_Aceito(obj.id, obj.email));
-					 }
+					if(obj.rastreado == false)
+					{
+						if(obj.aceito == false)
+						{
+							$('#listaRastreadores').append("<li class='table-view-cell' data-id='"+ obj.id +"'>"+
+																"<span class='email'>" + obj.email + "</span>" +
+																"<div>" +
+																	"<button class='btn btn-positive emp-aceitar'>Aceitar</button>" +
+																	"<button class='btn btn-negative emp-recusar'>Recusar</button>" +
+																"</div>" +
+															"</li>");
+						}
+						else
+						{
+							$('#listaRastreados').append(Constr_Li_Aceito(obj.id, obj.email, false));
+						}
+					}
+					else
+					{
+						$('#listaRastreadores').append(Constr_Li_Aceito(obj.id, obj.email, true));
+					}
 				});
 			}
 			else
@@ -36,15 +46,19 @@ $.ajax(
 		}
 });
 
-function Constr_Li_Aceito(id, email)
+function Constr_Li_Aceito(id, email, rastreado)
 {
 	var str = 	"<li class='table-view-cell' data-id='"+ id +"'>"+
 					"<span class='email'>" + email + "</span>" +
 					"<div>" +
 						"<button class='btn btn-negative emp-remover'>Remover</button>" +
-						"<div class='toggle active toggleHabilitado'>" +
-							"<div class='toggle-handle'></div>" +
-						"</div>" +
+						(
+							(rastreado === false) ?
+							("<button class='btn btn-positive emp-rastrear'>Rastrear</button>") :
+							("<div class='toggle active toggleHabilitado'>" +
+								"<div class='toggle-handle'></div>" +
+							"</div>")
+						) +
 					"</div>" +
 				"</li>";
 	return str;
@@ -52,20 +66,27 @@ function Constr_Li_Aceito(id, email)
 
 $(document).ready(function()
 {
-	$('#lista').on('click','.emp-aceitar',function(event)
+	$('#listaRastreadores').on('click','.emp-aceitar',function(event)
 	{
 		aceitaRecusa($(this).closest('li'), true);
 	});
-	$('#lista').on('click','.emp-recusar, .emp-remover',function(event)
+	$('#listaRastreadores, #listaRastreados').on('click','.emp-recusar, .emp-remover',function(event)
 	{
 		aceitaRecusa($(this).closest('li'), false);
+	});
+	
+	$('#listaRastreados').on('click','.emp-rastrear',function(event)
+	{
+		window.ID_RASTREIO = $(this).closest('li').data('id');
+		PUSH({url: 'main-mapas.html', transition: 'slide-out'});
 	});
 
 	function aceitaRecusa(li, resp)
 	{
 		var id = li.data('id');
 		var email = li.find('.email').text();
-		var had = !!(li.find('.emp-remover').length === 1);
+		var had = !!(li.find('.emp-remover').length === 1); // had = remover existente?
+		var rastreado = !!(li.closest('#listaRastreados').length === 1); // o alvo é um rastreado?
 		$.ajax(
 		{
 			url: basePepUrl + "resp_pareamento.php",
@@ -73,7 +94,8 @@ $(document).ready(function()
 			{
 				id: id,
 				resp: resp,
-				had: had
+				had: had, 
+				rastreado: rastreado
 			},
 			success: function OnAjaxSuccess(data, textStatus, jqXHR)
 			{

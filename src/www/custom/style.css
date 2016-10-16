@@ -48,6 +48,11 @@ span.toggle
 	vertical-align: middle;
 }
 
+.table-view-divider.txt-center
+{
+	padding-right: 15px;
+}
+
 /* Mask */
 #mask
 {
