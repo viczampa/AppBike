@@ -8,7 +8,7 @@
         Henrique Borsatto de Campos e Victor Zampieri Marinho
     </author>
     <content src="index.html" />
-    <preference name="DisallowOverscroll" value="true" />
+    <preference name="DisallowOverscroll" value="false" />
     <preference name="android-minSdkVersion" value="14" />
     <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />
     <plugin name="cordova-plugin-camera" source="npm" spec="~2.1.1" />
@@ -33,8 +33,8 @@
 	<plugin name="phonegap-plugin-push" source="npm" spec="~1.8.2">
 		<param name="SENDER_ID" value="172245467834" />
 	</plugin>
-    <icon src="icon.png" />
-    <platform name="android">
+    <icon src="www/res/icon/icon.png" />
+    <!--<platform name="android">
         <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="www/res/icon/android/drawable-mdpi-icon.png" />
         <icon density="hdpi" src="www/res/icon/android/drawable-hdpi-icon.png" />
@@ -103,7 +103,7 @@
         <icon height="150" platform="windows" src="www/res/icon/windows/Wide310x150Logo.scale-100.png" width="310" />
         <icon height="360" platform="windows" src="www/res/icon/windows/Wide310x150Logo.scale-240.png" width="744" />
         <splash height="1920" platform="windows" src="www/res/screen/windows/SplashScreenPhone.scale-240.png" width="1152" />
-    </platform>
+    </platform>-->
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
