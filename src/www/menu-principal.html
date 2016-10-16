@@ -17,17 +17,19 @@
 			</div>
 			<div id="Emparelhar" class="modal">
 				<nav class="bar bar-nav">
+					<h1 class="title">Emparelhar</h1>
 					<a class="icon icon-close pull-right" href="#Emparelhar"></a>
 				</nav>
-				<div class="content">
-					<input type="text" placeholder="E-mail que deseja parear" name='email_destino' id='email_destino'>
-					<!-- ira enviar requisição para outro celular aceitar ser localizado pelo outro -->
-					<button class="btn btn-positive btn-block" id='action-parear'>Enviar</button>
+				<div class="content content-padded">
+					<form>
+						<input type="text" placeholder="E-mail" name='email_destino' id='email_destino'>
+						<button class="btn btn-positive btn-block" type="button" id='action-parear'>Enviar</button>
+					</form>
 				</div>
 			</div>
 		</div>
 		<nav class="bar bar-tab">
-			<a class="tab-item active" href="menu-principal.html" data-transition="slide-in">
+			<a class="tab-item active" href="javascript:void(0);" data-transition="slide-in" data-ignore="push">
 				<span class="icon icon-home"></span>
 				<span class="tab-label">Home</span>
 			</a>
