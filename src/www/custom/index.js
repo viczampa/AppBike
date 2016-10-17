@@ -84,7 +84,7 @@ $(document).ready(function()
 	user_i.val(localStorage.getItem('login_usr'));
 	senha_i.val(localStorage.getItem('login_pwd'));
 
-	if(user_i.val() && senha_i.val())
+	if(user_i.val() && senha_i.val() && window.navFromBack === false)
 	{
 		// Faz login automático
 		$('#loginBtn').click();

@@ -1,5 +1,7 @@
 window.basePepUrl = 'http://pepperdrinks.smserver.com.br/app/src/public_html/';
 window.basePepUrl = 'http://localhost:80/AppBikeServer/src/public_html/';
+window.artificialHistory = [];
+window.navFromBack = false;
 
 $.ajaxSetup(
 {
@@ -94,6 +96,7 @@ document.addEventListener("deviceready", function(event)
 		alert('Indisponivel');
 	}
 });
+
 
 
 $.getScript( "https://www.gstatic.com/firebasejs/3.4.1/firebase.js", function(data, textStatus, jqxhr)
@@ -205,7 +208,7 @@ function smallTimeout(func)
 function PUSHMASK(push_opt)
 {
 	showMask();
-	$(window).one('push', function(){ hideMask(); })
+	$(window).one('push', function(event){ console.log('hidemask'); hideMask(); })
 	PUSH(push_opt);
 }
 
@@ -231,9 +234,35 @@ $.fn.prettyDel = function prettyDel(color, time)
 
 
 
+document.addEventListener("backbutton", onBackKeyDown, false);
+function onBackKeyDown(event)
+{
+	console.log('backbutton');
+    history.back();
+}
+
+
+
+window.addEventListener('popstate', function(event)
+{
+	// console.log(event);
+	// Window.History.Back
+	// if(!event.state)
+	{
+		window.artificialHistory.pop();
+		console.log("HISTORY BACK");
+		window.navFromBack = true;
+		PUSHMASK({url: window.artificialHistory.pop(), transition: 'slide-out'});
+	}
+});
+
+
+
 // Evento de navegação pela PUSH
 function checkPage()
 {
+	window.artificialHistory.push(window.location.href);
+	console.log(window.artificialHistory);
 	// Achar os js da página aqui, e rodá-los
 	var scripts = $('.content').find('script');
 	scripts.each(function(index, script)

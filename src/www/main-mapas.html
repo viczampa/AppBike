@@ -5,18 +5,14 @@
 	</head>
 	<body>
 		<nav class="bar bar-nav">
-			<a class="icon icon-left-nav pull-left" href="menu-principal.html" data-transition="slide-out"></a>
+			<a class="icon icon-left-nav pull-left" href="javascript:history.back();" data-transition="slide-out"></a>
 			<h1 class="title">Rastreamento</h1>
 		</nav>
 		<div class="content">
 			<script src="custom/main-mapas.js"></script>
-			<section>
-				<span id='actualLocation'></span>
-				<span id='estimatedTime'></span>
-				<input id="endereco" type="text" placeholder="Endereço">
-				<button type="button" id="exibir" class="btn btn-negative btn-block">Exibir Mapa</button>
+			<div id="map-container">
 				<div id="map"></div>
-			</section>
+			</div>
 		</div>
 	</body>
 </html>
