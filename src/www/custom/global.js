@@ -1,4 +1,4 @@
-window.basePepUrl = 'http://pepperdrinks.smserver.com.br/app/src/public_html/';
+// window.basePepUrl = 'http://pepperdrinks.smserver.com.br/app/src/public_html/';
 window.basePepUrl = 'http://localhost:80/AppBikeServer/src/public_html/';
 window.artificialHistory = [];
 window.navFromBack = false;
@@ -114,7 +114,7 @@ $.getScript( "https://www.gstatic.com/firebasejs/3.4.1/firebase.js", function(da
 		firebase.initializeApp(config);
 	}, 5);
 });
-	
+
 
 (function($)
 {
@@ -143,7 +143,7 @@ $.getScript( "https://www.gstatic.com/firebasejs/3.4.1/firebase.js", function(da
 })(jQuery);
 
 
-	
+
 $(document).ready(function()
 {
 	$(document).on('click', '.logout-onclick', function(event)

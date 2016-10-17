@@ -1,72 +1,64 @@
 showMask();
 
-$(document).ready(function()
-{
+$(document).ready(function(){
 	var lat, lng, address;
-	
+
 	var directionsService = new google.maps.DirectionsService();
 	var directionsDisplay = new google.maps.DirectionsRenderer();
 	var map;
-	
-	var positionSettings =
-	{
-		enableHighAccuracy: true, 
-		timeout: 10 * 1000, 
-		maximumAge: 7.5 * 1000
+
+	var positionSettings = {
+		enableHighAccuracy : true,
+		timeout            : 10 * 1000,
+		maximumAge				 : 7.5 * 1000
 	};
-	
+
 	var positionWatcher = navigator.geolocation.watchPosition(OnPositionChange, OnPositionError, positionSettings);
-	
-	function OnPositionError(positionErrorObj)
-	{
-		switch(positionErrorObj.code)
-		{
-			case 1: // PERMISSION_DENIED
-			{
+
+	function OnPositionError(positionErrorObj){
+		switch(positionErrorObj.code){
+			// PERMISSION_DENIED
+			case 1: {
 				console.log("PositionError PERMISSION_DENIED");
 			}
-			case 2: // POSITION_UNAVAILABLE
-			{
+			// POSITION_UNAVAILABLE
+			case 2: {
 				console.log("PositionError POSITION_UNAVAILABLE");
 			}
-			case 3: // TIMEOUT
-			{
+			// TIMEOUT
+			case 3: {
 				console.log("PositionError TIMEOUT");
 			}
-			default:
-			{
+			default:{
 				console.log('Erro no bagulho');
 			}
 		}
 		console.log(positionErrorObj.message);
 	}
-	
-	function OnPositionChange(positionObj)
-	{
+
+	function OnPositionChange(positionObj){
 		hideMask();
-		
-		map = new google.maps.Map($('#map').get(0),
-		{
+
+		map = new google.maps.Map($('#map').get(0),{
 			zoom: 13,
 			center: {lat: positionObj.coords.latitude, lng: positionObj.coords.longitude},
-			panControl: false, 
-			zoomControl: false, 
-			draggable: false, 
-			scrollwheel: false, 
-			mapTypeControl: false, 
-			scaleControl: false, 
-			streetViewControl: false, 
+			panControl: false,
+			zoomControl: false,
+			draggable: false,
+			scrollwheel: false,
+			mapTypeControl: false,
+			scaleControl: false,
+			streetViewControl: false,
 			overviewMapControl: false
 		});
 		directionsDisplay.setMap(map);
 
 		OnPositionChange = _OnPositionChange;
-		
+
 		_OnPositionChange(positionObj);
 	}
-	
-	function _OnPositionChange(positionObj)
-	{
+
+	function _OnPositionChange(positionObj){
 		lat = positionObj.coords.latitude;
 		lng = positionObj.coords.longitude;
 
@@ -81,20 +73,17 @@ $(document).ready(function()
 				address = registro[0];
 				$("#endereco").val(address.formatted_address);
 			}
-		});		
-		
+		});
+
 		calculateAndDisplayRoute(directionsService, directionsDisplay);
 
-		function calculateAndDisplayRoute()
-		{
-			directionsService.route(
-			{
+		function calculateAndDisplayRoute(){
+			directionsService.route({
 				origin: local,
 				destination: casaDoHenrique,
 				travelMode: google.maps.TravelMode.DRIVING
 			},
-			function(response, status)
-			{
+			function(response, status){
 				if (status === google.maps.DirectionsStatus.OK)
 				{
 					console.log(response);
