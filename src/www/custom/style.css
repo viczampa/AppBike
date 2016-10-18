@@ -77,6 +77,11 @@ span.toggle
 	vertical-align: middle;
 }
 
+.no-margin
+{
+	margin: 0;
+}
+
 /* Mask */
 #mask
 {
