@@ -1,7 +1,7 @@
-// window.basePepUrl = 'http://pepperdrinks.smserver.com.br/app/src/public_html/';
+window.basePepUrl = 'http://pepperdrinks.smserver.com.br/app/src/public_html/';
 window.basePepUrl = 'http://localhost:80/AppBikeServer/src/public_html/';
 window.artificialHistory = [];
-window.navFromBack = false;
+window.INTERVAL_CLEANUP = function(){};
 
 $.ajaxSetup(
 {
@@ -71,7 +71,7 @@ document.addEventListener("deviceready", function(event)
 				},
 				complete: function OnAjaxComplete(jqXHR, textStatus)
 				{
-					console.log(jqXHR, textStatus);
+					// console.log(jqXHR, textStatus);
 				}
 			});
 		});
@@ -208,7 +208,7 @@ function smallTimeout(func)
 function PUSHMASK(push_opt)
 {
 	showMask();
-	$(window).one('push', function(event){ console.log('hidemask'); hideMask(); })
+	$(window).one('push', function(event){ hideMask(); })
 	PUSH(push_opt);
 }
 
@@ -237,7 +237,6 @@ $.fn.prettyDel = function prettyDel(color, time)
 document.addEventListener("backbutton", onBackKeyDown, false);
 function onBackKeyDown(event)
 {
-	console.log('backbutton');
     history.back();
 }
 
@@ -250,8 +249,6 @@ window.addEventListener('popstate', function(event)
 	// if(!event.state)
 	{
 		window.artificialHistory.pop();
-		console.log("HISTORY BACK");
-		window.navFromBack = true;
 		PUSHMASK({url: window.artificialHistory.pop(), transition: 'slide-out'});
 	}
 });
@@ -261,9 +258,13 @@ window.addEventListener('popstate', function(event)
 // Evento de navegação pela PUSH
 function checkPage()
 {
+	// Histórico artificial
 	window.artificialHistory.push(window.location.href);
-	console.log(window.artificialHistory);
-	// Achar os js da página aqui, e rodá-los
+	
+	// Se estiver transmitindo algo ou recebendo algo, limpar essas porras AGORA
+	window.INTERVAL_CLEANUP();
+	
+	// Achar os js da página que foi carregada aqui, e rodá-los
 	var scripts = $('.content').find('script');
 	scripts.each(function(index, script)
 	{
@@ -274,6 +275,8 @@ function checkPage()
 			// Success, pegou o script e está rodando/rodou
 		});
 	});
+	
+	
 	// Attach novamente
 	$(window).one('push', checkPage);
 }

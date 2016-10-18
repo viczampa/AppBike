@@ -10,42 +10,15 @@
 		</nav>
 		<div class="content">
 			<script src="custom/main-mapas.js"></script>
+			<ul class='table-view no-margin'>
+				<li class='table-view-divider txt-center'><b>Rastreando:</b> <span id='alvo-nome'>---</span></li>
+				<li class='table-view-cell'><b>Endereço:</b> <span id='alvo-endereco'>---</span></li>
+				<li class='table-view-cell'><b>Distância:</b> <span id='alvo-distancia'>---</span></li>
+				<li class='table-view-cell'><b>Atualizado em:</b> <span id='alvo-data'>---</span></li>
+			</ul>
 			<div id="map-container">
 				<div id="map"></div>
 			</div>
 		</div>
 	</body>
 </html>
-<script src='custom/global.js'></script>
-<script src='custom/main-mapas.js'></script>
-<script src="jquery/jquery.min.js"></script>
-<script type="text/javascript">
-// passar para o main-mapas.js
-$.ajax(
-{
-	url: basePepUrl + "data-maps.php",
-	type:'POST',
-	data:
-	{
-		id   : 1,
-		lat  : 55,
-		long : 55,
-	},
-	success: function OnAjaxSuccess(data, textStatus, jqXHR){
-		console.log(data, textStatus, jqXHR);
-		if(data.result === true){
-				alert('DEU BOM' + data.message);
-		}
-		else{
-				// esta entrando aqui porém está enviando a requisição
-				alert('deu ruim' + data.message);
-		}
-	},
-	error: function OnAjaxError(jqXHR, textStatus, errorThrown){
-		console.log(jqXHR, textStatus, errorThrown);
-	},
-	complete: function OnAjaxComplete(jqXHR, textStatus){
-		console.log(jqXHR, textStatus);
-	}
-});
-</script>

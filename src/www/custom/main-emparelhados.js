@@ -1,5 +1,6 @@
 // Limpa as listas
 $('#listaRastreadores, #listaRastreados').children().remove();
+showMask();
 
 $.ajax(
 	{
@@ -47,6 +48,7 @@ $.ajax(
 						}
 					}
 				});
+				hideMask();
 			}
 			else
 			{
@@ -134,7 +136,9 @@ $(document).ready(function()
 	
 	$('#listaRastreados').on('click','.emp-rastrear',function(event)
 	{
-		window.ID_RASTREIO = $(this).closest('li').data('id');
+		var li = $(this).closest('li');
+		window.ID_RASTREIO = li.data('id');
+		window.EMAIL_RASTREIO = li.find('.email').text();
 		PUSHMASK({url: 'main-mapas.html', transition: 'slide-out'});
 	});
 
