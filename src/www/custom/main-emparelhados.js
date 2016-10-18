@@ -19,8 +19,10 @@ $.ajax(
 							"<li class='table-view-cell dyna' data-id='"+ obj.id +"'>"+
 								"<span class='email'>" + obj.email + "</span>" +
 								"<div class='dyna'>" +
-									"<button class='btn btn-positive emp-aceitar'>Aceitar</button>" +
-									"<button class='btn btn-negative emp-recusar'>Recusar</button>" +
+									// "<button class='btn btn-positive emp-aceitar'>Aceitar</button>" +
+									// "<button class='btn btn-negative emp-recusar'>Recusar</button>" +
+									"<img class='emp-aceitar' src='http://localhost/AppBike/src/www/icon/tick_blue.png' width='30px'height='30px'></button>" +
+									"<img class='emp-recusar' src='http://localhost/AppBike/src/www/icon/error.png' width='30px'height='30px'></button>" +
 								"</div>" +
 							"</li>");
 						}
@@ -122,7 +124,7 @@ $(document).ready(function()
 			}
 		});
 	});
-	
+
 	$('#listaRastreadores').on('click','.emp-aceitar',function(event)
 	{
 		aceitaRecusa($(this).closest('li'), true);
@@ -131,7 +133,7 @@ $(document).ready(function()
 	{
 		aceitaRecusa($(this).closest('li'), false);
 	});
-	
+
 	$('#listaRastreados').on('click','.emp-rastrear',function(event)
 	{
 		window.ID_RASTREIO = $(this).closest('li').data('id');
@@ -151,7 +153,7 @@ $(document).ready(function()
 			{
 				id: id,
 				resp: resp,
-				had: had, 
+				had: had,
 				rastreado: rastreado
 			},
 			success: function OnAjaxSuccess(data, textStatus, jqXHR)
