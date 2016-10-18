@@ -1,5 +1,6 @@
 window.basePepUrl = 'http://pepperdrinks.smserver.com.br/app/src/public_html/';
 window.basePepUrl = 'http://localhost:80/AppBikeServer/src/public_html/';
+window.basePepUrl = 'http://localhost:80/AppBikeServer/src/public_html/';
 window.artificialHistory = [];
 window.INTERVAL_CLEANUP = function(){};
 
@@ -260,10 +261,10 @@ function checkPage()
 {
 	// Histórico artificial
 	window.artificialHistory.push(window.location.href);
-	
+
 	// Se estiver transmitindo algo ou recebendo algo, limpar essas porras AGORA
 	window.INTERVAL_CLEANUP();
-	
+
 	// Achar os js da página que foi carregada aqui, e rodá-los
 	var scripts = $('.content').find('script');
 	scripts.each(function(index, script)
@@ -275,8 +276,8 @@ function checkPage()
 			// Success, pegou o script e está rodando/rodou
 		});
 	});
-	
-	
+
+
 	// Attach novamente
 	$(window).one('push', checkPage);
 }

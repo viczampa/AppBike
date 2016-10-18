@@ -11,22 +11,19 @@ $(document).ready(function()
 	var directionsDisplay = new google.maps.DirectionsRenderer();
 	var geocoder = new google.maps.Geocoder();
 	var map;
-	
-	$('#alvo-nome').text(window.EMAIL_RASTREIO);
-	
-	var positionWatcher = null;
-	
-	document.addEventListener('deviceready', function()
-	{
-		var positionSettings =
-		{
-			enableHighAccuracy: true,
-			timeout: 10 * 1000,
-			maximumAge: 7.5 * 1000
-		};
 
-		positionWatcher = navigator.geolocation.watchPosition(OnPositionChange, OnPositionError, positionSettings);
-	});	
+	$('#alvo-nome').text(window.EMAIL_RASTREIO);
+
+	var positionWatcher = null;
+
+	var positionSettings =
+	{
+		enableHighAccuracy: true,
+		timeout: 10 * 1000,
+		maximumAge: 7.5 * 1000
+	};
+
+	positionWatcher = navigator.geolocation.watchPosition(OnPositionChange, OnPositionError, positionSettings);
 
 	function OnPositionError(positionErrorObj)
 	{
@@ -96,10 +93,10 @@ $(document).ready(function()
 
 		calculateAndDisplayRoute();
 	}
-	
+
 	var ajax_server_interval = setInterval(RetrieveTrackedLocation, 15 * 1000);
 	RetrieveTrackedLocation();
-	
+
 	function RetrieveTrackedLocation()
 	{
 		$.ajax(
@@ -114,8 +111,6 @@ $(document).ready(function()
 				console.log(data, textStatus, jqXHR);
 				if(data.result === true)
 				{
-					console.log('DEU BOM', data.data);
-					
 					lat_alvo = data.data.lat;
 					lng_alvo = data.data.lng;
 					latLng_alvo = new google.maps.LatLng(lat_alvo, lng_alvo);
@@ -128,14 +123,16 @@ $(document).ready(function()
 							$("#alvo-endereco").text(address_alvo.formatted_address);
 						}
 					});
-					
-					$("#alvo-data").text(data.data.data);
+
+					$("#alvo-data").text(data.data.date);
 
 					calculateAndDisplayRoute();
+
+					hideMask();
 				}
 				else
 				{
-					
+
 				}
 			},
 			error: function OnAjaxError(jqXHR, textStatus, errorThrown)
@@ -148,7 +145,7 @@ $(document).ready(function()
 			}
 		});
 	}
-	
+
 	function calculateAndDisplayRoute()
 	{
 		if(latLng instanceof google.maps.LatLng === false || latLng_alvo instanceof google.maps.LatLng === false)
@@ -168,6 +165,7 @@ $(document).ready(function()
 			{
 				console.log(response);
 				directionsDisplay.setDirections(response);
+				$('#alvo-distancia').text(response.routes[0].legs[0].distance.text);
 			}
 			else
 			{
@@ -175,10 +173,11 @@ $(document).ready(function()
 			}
 		});
 	}
-	
-	
+
+
 	window.INTERVAL_CLEANUP = function()
 	{
+		console.log('Cleanup mapas');
 		window.EMAIL_RASTREIO = null;
 		window.ID_RASTREIO = null;
 		clearInterval(ajax_server_interval);
