@@ -6,7 +6,7 @@ $(document).ready(function()
 
 	$('#cadastrarBtn').on('click', function(event)
 	{
-		toggleMask();
+		showMask();
 		$.ajax(
 		{
 			url: basePepUrl + "cadastro.php",
@@ -33,14 +33,14 @@ $(document).ready(function()
 			},
 			complete: function OnAjaxComplete(jqXHR, textStatus)
 			{
-				toggleMask();
+				hideMask();
 			}
 		});
 	});
 
 	$('#loginBtn').on('click', function(event)
 	{
-		toggleMask();
+		showMask();
 		$.ajax(
 		{
 			url: basePepUrl + "login.php",
@@ -76,7 +76,7 @@ $(document).ready(function()
 			},
 			complete: function OnAjaxComplete(jqXHR, textStatus)
 			{
-				toggleMask();
+				hideMask();
 			}
 		});
 	});
@@ -84,9 +84,24 @@ $(document).ready(function()
 	user_i.val(localStorage.getItem('login_usr'));
 	senha_i.val(localStorage.getItem('login_pwd'));
 
-	if(user_i.val() && senha_i.val() && window.navFromBack === false)
+	console.log('checa nav from back');
+	if(user_i.val().length > 0 && senha_i.val().length > 0 && window.navFromBack !== true)
 	{
 		// Faz login automático
 		$('#loginBtn').click();
+	}
+	
+	window.navFromBack = false;
+	
+	window.custom_back_key = function()
+	{
+		console.log('custom back key');
+		navigator.app.exitApp();
+		return false;
+	};
+	
+	window.INTERVAL_CLEANUP = function()
+	{
+		window.custom_back_key = function(){};
 	}
 });

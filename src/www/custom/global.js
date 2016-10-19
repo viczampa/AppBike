@@ -2,6 +2,8 @@ window.basePepUrl = 'http://pepperdrinks.smserver.com.br/app/src/public_html/';
 // window.basePepUrl = 'http://localhost:80/AppBikeServer/src/public_html/';
 window.artificialHistory = [];
 window.INTERVAL_CLEANUP = function(){};
+window.custom_back_key = function(){};
+window.navFromBack = false;
 
 $.ajaxSetup(
 {
@@ -19,10 +21,11 @@ $.ajaxSetup(
 	}
 });
 
+
 document.addEventListener("deviceready", function(event)
 {
 	alert("deviceready");
-	if(window.PushNotification)
+	if(typeof PushNotification !== 'undefined')
 	{
 		var push = PushNotification.init(
 		{
@@ -98,7 +101,7 @@ document.addEventListener("deviceready", function(event)
 });
 
 
-
+/*
 $.getScript( "https://www.gstatic.com/firebasejs/3.4.1/firebase.js", function(data, textStatus, jqxhr)
 {
 	window.setTimeout(function()
@@ -114,6 +117,7 @@ $.getScript( "https://www.gstatic.com/firebasejs/3.4.1/firebase.js", function(da
 		firebase.initializeApp(config);
 	}, 5);
 });
+*/
 
 
 (function($)
@@ -208,7 +212,7 @@ function smallTimeout(func)
 function PUSHMASK(push_opt)
 {
 	showMask();
-	$(window).one('push', function(event){ hideMask(); })
+	$(window).one('push', function(event){ hideMask(); });
 	PUSH(push_opt);
 }
 
@@ -237,9 +241,12 @@ $.fn.prettyDel = function prettyDel(color, time)
 document.addEventListener("backbutton", onBackKeyDown, false);
 function onBackKeyDown(event)
 {
-    history.back();
+	var gh = window.custom_back_key();
+	if(gh !== true)
+	{
+		history.back();
+	}
 }
-
 
 
 window.addEventListener('popstate', function(event)
@@ -250,6 +257,8 @@ window.addEventListener('popstate', function(event)
 	{
 		window.artificialHistory.pop();
 		PUSHMASK({url: window.artificialHistory.pop(), transition: 'slide-out'});
+		console.log('nav from back true');
+		window.navFromBack = true;
 	}
 });
 
@@ -275,7 +284,6 @@ function checkPage()
 			// Success, pegou o script e está rodando/rodou
 		});
 	});
-
 
 	// Attach novamente
 	$(window).one('push', checkPage);
