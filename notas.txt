@@ -13,7 +13,13 @@
 
 -FeedBack user leigo
 
-		tela de login ta feia
+		tela de login ta feia[
+			ta repetindo 2 login, tirar o branco de cima
+			subir o toggle para acima do botão login
+			trocar botão para do login para entrar/acessar
+			criar uma conta no where muito grande, e a chamada ta pequena
+
+		]
 
 		placeholder muito claro
 
@@ -21,7 +27,7 @@
 
 		placeholder do login com usuario mas tem que ser email
 
-		trocar botão para do login para entrar/acessar
+
 
 		placeholder do emparelhar, usuário pensa que tem que por seu email denovo,
 		deixar o emparelhar + claro

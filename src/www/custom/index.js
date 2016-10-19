@@ -84,7 +84,6 @@ $(document).ready(function()
 	user_i.val(localStorage.getItem('login_usr'));
 	senha_i.val(localStorage.getItem('login_pwd'));
 
-	console.log('checa nav from back');
 	if(user_i.val().length > 0 && senha_i.val().length > 0 && window.navFromBack !== true)
 	{
 		// Faz login automático
@@ -95,7 +94,6 @@ $(document).ready(function()
 	
 	window.custom_back_key = function()
 	{
-		console.log('custom back key');
 		navigator.app.exitApp();
 		return false;
 	};

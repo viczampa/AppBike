@@ -81,20 +81,30 @@ span.toggle
 .table-view-cell.dyna
 {
 	padding-right: 15px;
+	white-space: nowrap;
+	display: flex;
+	align-items: center;
+	align-content: center;
+	justify-content: space-between;
+	height: 43px !important;
+	overflow: hidden;
 }
 
 .dyna > *:last-child
 {
 	display: inline-block;
-	float: right;
 	vertical-align: middle;
 	margin-left: 15px;
+	flex: 0 0 auto;
 }
 
 .dyna > *:first-child
 {
 	display: inline-block;
 	vertical-align: middle;
+	max-width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .no-margin
@@ -127,9 +137,11 @@ span.toggle
 }
 #loader
 {
-	background-image:url(hourglass.gif);
-	width: 200px;
-	height: 200px;
+	background-image: url(hourglass.gif);
+	background-size: contain;
+	background-position: center;
+	width: 100px;
+	height: 100px;
 }
 
 
