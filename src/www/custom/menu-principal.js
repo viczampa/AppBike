@@ -31,4 +31,16 @@ $(document).ready(function()
 			}
 		});
 	});
+	
+	window.custom_back_key = function()
+	{
+		console.log('custom back key');
+		navigator.app.exitApp();
+		return false;
+	};
+	
+	window.INTERVAL_CLEANUP = function()
+	{
+		window.custom_back_key = function(){};
+	}
 });

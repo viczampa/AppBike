@@ -46,6 +46,26 @@
 	background: transparent;
 }
 
+.flex-vertical
+{
+	display: flex;
+	height: 100%;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	align-content: flex-start;
+}
+
+.flex-vertical > *
+{
+	flex: 0 0 auto;
+}
+
+.flex-vertical > .flex-expand
+{
+	flex: 1 1 auto;
+}
+
 /* Overrides */
 span.toggle
 {
@@ -68,7 +88,7 @@ span.toggle
 	display: inline-block;
 	float: right;
 	vertical-align: middle;
-	margin-left: 25px;
+	margin-left: 15px;
 }
 
 .dyna > *:first-child
@@ -117,9 +137,10 @@ span.toggle
 /* Main Mapas */
 #map-container
 {
-	height: 100% !important;
+	height: auto;
+	min-height: 350px;
 	width: 100% !important;
-	position: absolute !important;
+	position: relative !important;
 }
 
 #map

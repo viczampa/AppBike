@@ -22,8 +22,8 @@ $.ajax(
 								"<div class='dyna'>" +
 									// "<button class='btn btn-positive emp-aceitar'>Aceitar</button>" +
 									// "<button class='btn btn-negative emp-recusar'>Recusar</button>" +
-									"<img class='emp-aceitar' src='http://localhost/AppBike/src/www/icon/tick_blue.png' width='30px'height='30px'></button>" +
-									"<img class='emp-recusar' src='http://localhost/AppBike/src/www/icon/error.png' width='30px'height='30px'></button>" +
+									"<img class='emp-aceitar' src='icon/tick_blue.png' width='30px' height='30px' />" +
+									"<img class='emp-recusar' src='icon/error.png' width='30px' height='30px' />" +
 								"</div>" +
 							"</li>");
 						}
@@ -74,7 +74,8 @@ function Constr_Li_Aceito(id, email, rastreado, habilitado)
 	var str = 	"<li class='table-view-cell dyna' data-id='"+ id +"'>"+
 					"<span class='email'>" + email + "</span>" +
 					"<div class='dyna'>" +
-						"<button class='btn btn-negative emp-remover'>Remover</button>" +
+						// "<button class='btn btn-negative emp-remover'>Remover</button>" +
+						"<img class='emp-remover' src='icon/error.png' width='30px' height='30px' />" +
 						(
 							(rastreado == true) ?
 							("<button class='btn btn-positive emp-rastrear'>Rastrear</button>") :
