@@ -1,6 +1,5 @@
 window.basePepUrl = 'http://pepperdrinks.smserver.com.br/app/src/public_html/';
-window.basePepUrl = 'http://localhost:80/AppBikeServer/src/public_html/';
-window.basePepUrl = 'http://localhost:80/AppBikeServer/src/public_html/';
+// window.basePepUrl = 'http://localhost:80/AppBikeServer/src/public_html/';
 window.artificialHistory = [];
 window.INTERVAL_CLEANUP = function(){};
 
