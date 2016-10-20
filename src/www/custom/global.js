@@ -22,6 +22,13 @@
 		}
 	});
 
+	window.IniciarTransmissao = function IniciarTransmissao()
+	{
+		$.getScript('transmitir.js', function(data, textStatus, jqxhr)
+		{
+			// Success, pegou o script e está rodando/rodou
+		});
+	}
 
 	document.addEventListener("deviceready", function(event)
 	{
@@ -31,7 +38,7 @@
 			// alert("Push disponível!")
 			$(window).one('appb_login', function()
 			{
-				// alert("Login feito, bindando push!"); 
+				// alert("Login feito, bindando push!");
 				var push = PushNotification.init(
 				{
 					android:

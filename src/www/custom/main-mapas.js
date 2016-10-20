@@ -117,6 +117,13 @@
 						lng_alvo = data.data.lng;
 						latLng_alvo = new google.maps.LatLng(lat_alvo, lng_alvo);
 
+						// TODO: Checar se a distância dá mais de 2 metros de diferença
+						// Se não, RETURN agora e parar o bagulho
+						if(false)
+						{
+							return;
+						}
+
 						geocoder.geocode({'latLng': latLng_alvo}, function(geo_result, status)
 						{
 							if(status === google.maps.GeocoderStatus.OK)
