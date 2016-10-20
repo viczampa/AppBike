@@ -34,7 +34,7 @@
 		<param name="SENDER_ID" value="172245467834" />
 	</plugin>
 	<plugin name="cordova-plugin-local-notifications" source="npm" spec="~1.0.0" />
-    <icon src="www/res/icon/icon.png" />
+    <icon src="res/icon/icon.png" />
     <!--<platform name="android">
         <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="www/res/icon/android/drawable-mdpi-icon.png" />
