@@ -65,7 +65,7 @@
 				console.log(data, textStatus, jqXHR);
 				if(data.result === true)
 				{
-					alert('localização enviada com sucesso');
+					console.log('Localização mandada p/ server com sucesso');
 				}
 			},
 			error: function OnAjaxError(jqXHR, textStatus, errorThrown)
@@ -74,7 +74,7 @@
 			},
 			complete: function OnAjaxComplete(jqXHR, textStatus)
 			{
-				// console.log(jqXHR, textStatus);
+
 			}
 		});
 	}
