@@ -31,6 +31,7 @@
 			// alert("Push disponível!")
 			$(window).one('appb_login', function()
 			{
+				// alert("Login feito, bindando push!"); 
 				var push = PushNotification.init(
 				{
 					android:

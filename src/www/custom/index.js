@@ -63,6 +63,9 @@ $(document).ready(function()
 						localStorage.removeItem('login_usr');
 						localStorage.removeItem('login_pwd');
 					}
+					// Evento login
+					$(window).trigger('appb_login');
+					// Push troca página pelo JS
 					PUSH({url: 'menu-principal.html', transition: 'slide-in'});
 				}
 				else
