@@ -24,11 +24,11 @@
 
 	window.IniciarTransmissao = function IniciarTransmissao()
 	{
-		$.getScript('transmitir.js', function(data, textStatus, jqxhr)
+		$.getScript('custom/transmitir.js', function(data, textStatus, jqxhr)
 		{
 			// Success, pegou o script e está rodando/rodou
 		});
-	}
+	};
 
 	document.addEventListener("deviceready", function(event)
 	{
