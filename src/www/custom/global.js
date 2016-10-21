@@ -6,6 +6,7 @@
 	window.INTERVAL_CLEANUP = function(){};
 	window.custom_back_key = function(){};
 	window.navFromBack = false;
+	window.PUSH_ID = null;
 
 	$.ajaxSetup(
 	{
@@ -133,8 +134,8 @@
 				}
 			}
 			console.log(positionErrorObj.message);
-      PararTransmissao();
-      ComecarTransmissao();
+			PararTransmissao();
+			ComecarTransmissao();
 		}
 
 		function OnPositionChange(positionObj)
@@ -191,50 +192,76 @@
 
 	document.addEventListener('deviceready', function()
 	{
-    if(typeof navigator.notification === 'undefined')
-    {
-      navigator.notification = {};
-      navigator.notification.alert = window.alert.bind(window);
-    }
-    $(window).on('appb_login', function()
-    {
-      window.ComecarTransmissao();
-    });
+	    if(typeof navigator.notification === 'undefined')
+	    {
+	      navigator.notification = {};
+	      navigator.notification.alert = window.alert.bind(window);
+	  	}
+	    $(window).on('appb_login', function()
+	    {
+	      window.ComecarTransmissao();
+	    });
 		if(typeof PushNotification !== 'undefined')
 		{
-			// navigator.notification.alert("Push disponível!")
+			// navigator.notification.alert("Push disponível!");
 			$(window).one('appb_login', function()
 			{
-
 				// navigator.notification.alert("Login feito, bindando push!");
-				var push = PushNotification.init(
+				if(window.PUSH_ID)
 				{
-					android:
-					{
-						senderID: "172245467834"
-					},
-					browser:
-					{
-						// pushServiceURL: 'http://push.api.phonegap.com/v1/push'
-					},
-					ios:
-					{
-						alert: "true",
-						badge: "true",
-						sound: "true"
-					},
-					windows: {}
-				});
-				push.on('registration', function(data)
+					mandaPushServer();
+				}
+				else
 				{
-					// data.registrationId
-					navigator.notification.alert("Push registrado! \n\n OBJ: " + JSON.stringify(data));
+					var push = PushNotification.init(
+					{
+						android:
+						{
+							senderID: "172245467834"
+						},
+						browser:
+						{
+							// pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+						},
+						ios:
+						{
+							alert: "true",
+							badge: "true",
+							sound: "true"
+						},
+						windows: {}
+					});
+					push.on('registration', function(data)
+					{
+						// data.registrationId
+						window.PUSH_ID = data.registrationId;
+						navigator.notification.alert("Push registrado! \n\n OBJ: " + JSON.stringify(data));
+						mandaPushServer();
+					});
+					push.on('notification', function(data)
+					{
+						// data.message,
+						// data.title,
+						// data.count,
+						// data.sound,
+						// data.image,
+						// data.additionalData
+						// navigator.notification.alert("Push recebido! \n\n OBJ: " + JSON.stringify(data));
+					});
+					push.on('error', function(e)
+					{
+						// e.message
+						// navigator.notification.alert("Push error! \n\n OBJ: " + JSON.stringify(e));
+					});
+				}
+				function mandaPushServer()
+				{
 					$.ajax(
 					{
 						url: basePepUrl + "push_reg.php",
 						data:
 						{
-							regid: data.registrationId
+							regid: window.PUSH_ID
 						},
 						success: function OnAjaxSuccess(data, textStatus, jqXHR)
 						{
@@ -257,22 +284,7 @@
 							// console.log(jqXHR, textStatus);
 						}
 					});
-				});
-				push.on('notification', function(data)
-				{
-					// data.message,
-					// data.title,
-					// data.count,
-					// data.sound,
-					// data.image,
-					// data.additionalData
-					// navigator.notification.alert("Push recebido! \n\n OBJ: " + JSON.stringify(data));
-				});
-				push.on('error', function(e)
-				{
-					// e.message
-					// navigator.notification.alert("Push error! \n\n OBJ: " + JSON.stringify(e));
-				});
+				}
 			});
 		}
 		else
@@ -328,6 +340,34 @@
 						// navigator.notification.alert(data.message);
 						localStorage.removeItem('login_pwd');
 						PUSHMASK({url: 'index.html', transition: 'slide-out'});
+						$.ajax(
+						{
+							url: basePepUrl + "push_unreg.php",
+							data:
+							{
+								regid: window.PUSH_ID
+							},
+							success: function OnAjaxSuccess(data, textStatus, jqXHR)
+							{
+								console.log(data, textStatus, jqXHR);
+								if(data.result === true)
+								{
+
+								}
+								else
+								{
+
+								}
+							},
+							error: function OnAjaxError(jqXHR, textStatus, errorThrown)
+							{
+								console.log(jqXHR, textStatus, errorThrown);
+							},
+							complete: function OnAjaxComplete(jqXHR, textStatus)
+							{
+								// console.log(jqXHR, textStatus);
+							}
+						});
 					}
 					else
 					{
