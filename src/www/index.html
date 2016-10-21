@@ -36,7 +36,6 @@
 				<button class="btn btn-positive btn-block" type="button" id='loginBtn'>Acesso</button>
 				<span class="txt-white" style='font-size: 20px !important;display: flex;justify-content: center; margin-top: 15px;'>Ainda não possui uma conta?</span>
 				<a href="#CriarConta"><button class="btn btn-block btn-primary" type="button" style='margin-top:3%;'>Criar uma nova conta</button></a>
-        <button class="btn btn-block btn-primary teste-transmitir" type="button" style='margin-top:3%; background-color:purple;'>Teste Transmitir</button>
 			</form>
 			<div id="CriarConta" class="modal">
 				<nav class="bar">
@@ -55,8 +54,33 @@
 		</div>
 	</body>
   <script type="text/javascript">
-    $('.teste-transmitir').click(function(){
-      IniciarTransmissao();
-    });
-  </script>
+
+  function initMap() {
+          // Try HTML5 geolocation.
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                //apto a buscar localizacao
+            }, function() {
+                alert('O aplicativo precisa que você ligue sua localização para continuarmos');
+                if(typeof cordova.plugins.settings.openSetting != undefined){
+                    cordova.plugins.settings.open(function(){
+                      console.log("abrindo settings")
+                    },
+                    function(){
+                      console.log("nao abriu settings")
+                    });
+                  }
+                showMask();
+            });
+          } else {
+            alert('ligue sua localização para usar o app');
+
+          }
+        }
+
+  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+      alert('ligue sua localização');
+      }
+      initMap();
+      </script>
 </html>
