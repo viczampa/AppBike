@@ -7,7 +7,7 @@
 		window.artificialHistory = [];
 		window.INTERVAL_CLEANUP = function(){};
 		window.custom_back_key = function(){};
-		window.navFromBack = false;
+		window.navFromBack = false
 
 		$.ajaxSetup(
 		{
@@ -24,15 +24,6 @@
 				withCredentials: true
 			}
 		});
-
-
-	window.IniciarTransmissao = function IniciarTransmissao()
-	{
-		$.getScript('transmitir.js', function(data, textStatus, jqxhr)
-		{
-			// Success, pegou o script e está rodando/rodou
-		});
-	}
 
 		window.getDistanceFromLatLonInKm = function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2)
 		{
@@ -75,7 +66,6 @@
 				// Success, pegou o script e está rodando/rodou
 			});
 		};
-
 
 		if(typeof PushNotification !== 'undefined')
 		{
