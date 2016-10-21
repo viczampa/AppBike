@@ -12,7 +12,7 @@ $(document).ready(function()
 			url: basePepUrl + "cadastro.php",
 			data:
 			{
-				email : $('#cad_user').val(),
+				user : $('#cad_user').val(),
 				senha : $('#cad_senha').val(),
 				nome : $('#cad_nome').val()
 			},
