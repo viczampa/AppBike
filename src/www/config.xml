@@ -9,7 +9,7 @@
     </author>
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="false" />
-    <preference name="android-minSdkVersion" value="17" />
+    <preference name="android-minSdkVersion" value="16" />
     <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />
     <plugin name="cordova-plugin-camera" source="npm" spec="~2.1.1" />
     <plugin name="cordova-plugin-media-capture" source="npm" spec="~1.2.0" />
@@ -41,7 +41,7 @@
 		<preference name="xwalkMultipleApk" value="false"/>
 	</plugin>
 
-	<plugin name="cordova-plugin-fastrde-checkgps" source="npm" spec="1.0.0" />
+	<plugin name="cordova.plugins.diagnostic" source="npm" spec="3.2.2" />
 
     <icon src="res/icon/icon.png" />
     <!--<platform name="android">
