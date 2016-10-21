@@ -1,6 +1,6 @@
 (function()
 {
-	$(document).one('deviceready', function()
+	document.addEventListener('deviceready', function()
 	{
 		window.basePepUrl = 'http://pepperdrinks.smserver.com.br/app/src/public_html/';
 		// window.basePepUrl = 'http://localhost:80/AppBikeServer/src/public_html/';
