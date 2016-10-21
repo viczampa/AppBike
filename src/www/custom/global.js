@@ -59,19 +59,126 @@
 			return getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) * 1000.0;
 		}
 
-		window.IniciarTransmissao = function IniciarTransmissao()
+		// Transmissao funcs
+		(function()
 		{
-			$.getScript('custom/transmitir.js', function(data, textStatus, jqxhr)
+			var positionWatcher = null;
+			var positionSettings =
 			{
-				// Success, pegou o script e está rodando/rodou
-			});
-		};
+				enableHighAccuracy: true,
+				timeout: 10 * 1000,
+				maximumAge: 7.5 * 1000
+			};
+
+			var lat, lng;
+			var lat_velha, lng_velha;
+
+			window.ComecarTransmissao = function ComecarTransmissao()
+			{
+				if(positionWatcher)
+					return;
+				positionWatcher = navigator.geolocation.watchPosition(OnPositionChange, OnPositionError, positionSettings);
+			}
+
+			window.PararTransmissao = function PararTransmissao()
+			{
+				if(positionWatcher)
+				{
+					navigator.geolocation.clearWatch(positionWatcher);
+					positionWatcher = null;
+				}
+			}
+
+
+			function OnPositionError(positionErrorObj)
+			{
+				switch(positionErrorObj.code)
+				{
+					// PERMISSION_DENIED
+					case 1:
+					{
+						console.log("PositionError PERMISSION_DENIED");
+						break;
+					}
+					// POSITION_UNAVAILABLE
+					case 2:
+					{
+						console.log("PositionError POSITION_UNAVAILABLE");
+						break;
+					}
+					// TIMEOUT
+					case 3:
+					{
+						console.log("PositionError TIMEOUT");
+						break;
+					}
+					default:
+					{
+						console.log('Erro no bagulho ???');
+						break;
+					}
+				}
+				console.log(positionErrorObj.message);
+			}
+
+			function OnPositionChange(positionObj)
+			{
+				lat = positionObj.coords.latitude;
+				lng = positionObj.coords.longitude;
+
+				// Checar se a distância dá mais de 2 metros de diferença
+				// Se não, RETURN agora e parar o bagulho
+				if(getDistanceFromLatLonInM(lat, lng, lat_velha, lng_velha) < 2)
+				{
+					console.log('Distancia ignorada, diferença mto pequena -- transmt');
+					return;
+				}
+
+				lat_velha = lat_alvo;
+				lng_velha = lng_alvo;
+
+				$.ajax(
+				{
+					url: basePepUrl + "ajax_geoloc.php",
+					data:
+					{
+						lat: lat,
+						lng: lng
+					},
+					success: function OnAjaxSuccess(data, textStatus, jqXHR)
+					{
+						console.log(data, textStatus, jqXHR);
+						if(data.result === true)
+						{
+							console.log('Localização mandada p/ server com sucesso');
+						}
+						else
+						{
+							if(data.special == "RELOG")
+							{
+								window.PararTransmissao();
+							}
+						}
+					},
+					error: function OnAjaxError(jqXHR, textStatus, errorThrown)
+					{
+						console.log(jqXHR, textStatus, errorThrown);
+					},
+					complete: function OnAjaxComplete(jqXHR, textStatus)
+					{
+
+					}
+				});
+			}
+		})();
 
 		if(typeof PushNotification !== 'undefined')
 		{
 			// alert("Push disponível!")
 			$(window).one('appb_login', function()
 			{
+				window.ComecarTransmissao();
+
 				// alert("Login feito, bindando push!");
 				var push = PushNotification.init(
 				{
