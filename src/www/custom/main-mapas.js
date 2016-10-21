@@ -35,17 +35,21 @@
 				// PERMISSION_DENIED
 				case 1:{
 					console.log("PositionError PERMISSION_DENIED");
+          break;
 				}
 				// POSITION_UNAVAILABLE
 				case 2:{
 					console.log("PositionError POSITION_UNAVAILABLE");
+          break;
 				}
 				// TIMEOUT
 				case 3:{
 					console.log("PositionError TIMEOUT");
+          break;
 				}
 				default:{
 					console.log('Erro no bagulho');
+          break;
 				}
 			}
 			// console.log(positionErrorObj.message);
@@ -127,12 +131,10 @@
 
             if(!map)
             {
-              navigator.notification.alert('Construindo mapa');
-
               map = new google.maps.Map($('#map').get(0),
               {
                 zoom               : 13,
-                center             : {lat: lat_alvo, lng: lng_alvo},
+                center             : latLng_alvo,
                 panControl         : false,
                 zoomControl        : false,
                 draggable          : false,
@@ -161,9 +163,10 @@
 					}
 					else
 					{
-            if(data.special == "")
+            if(data.special == "NOPERM")
             {
-              // TODO: Exibir que o rastreamento foi desligado para vc por esse alvo, e voltar pra pagina pareamentos
+              navigator.notification.alert("O rastreamento foi desligado para você por esse usuário!");
+              window.history.back();
             }
 					}
 				},
