@@ -1,6 +1,5 @@
 (function()
 {
-
 	$(document).ready(function()
 	{
 		$('#action-parear').on('click', function(event)
@@ -11,7 +10,7 @@
 				url: basePepUrl + "pareamento.php",
 				data:
 				{
-					email_destino: $('#email_destino').val(),
+					user_destino: $('#user_destino').val(),
 				},
 				success: function OnAjaxSuccess(data, textStatus, jqXHR)
 				{
@@ -47,5 +46,4 @@
 			window.custom_back_key = function(){};
 		}
 	});
-
 })();

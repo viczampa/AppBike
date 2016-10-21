@@ -16,7 +16,7 @@
 		var geocoder = new google.maps.Geocoder();
 		var map;
 
-		$('#alvo-nome').text(window.EMAIL_RASTREIO);
+		$('#alvo-nome').text(window.USUARIO_RASTREIO);
 
 		var positionWatcher = null;
 
@@ -30,50 +30,32 @@
 		positionWatcher = navigator.geolocation.watchPosition(OnPositionChange, OnPositionError, positionSettings);
 
 		function OnPositionError(positionErrorObj)
-		{
-			switch(positionErrorObj.code)
-			{
+    {
+			switch(positionErrorObj.code){
 				// PERMISSION_DENIED
-				case 1:
-				{
+				case 1:{
 					console.log("PositionError PERMISSION_DENIED");
 				}
 				// POSITION_UNAVAILABLE
-				case 2:
-				{
+				case 2:{
 					console.log("PositionError POSITION_UNAVAILABLE");
 				}
 				// TIMEOUT
-				case 3:
-				{
+				case 3:{
 					console.log("PositionError TIMEOUT");
 				}
-				default:
-				{
+				default:{
 					console.log('Erro no bagulho');
 				}
 			}
-			console.log(positionErrorObj.message);
+			// console.log(positionErrorObj.message);
+      navigator.geolocation.clearWatch(positionWatcher);
+      positionWatcher = navigator.geolocation.watchPosition(OnPositionChange, OnPositionError, positionSettings);
 		}
 
 		function OnPositionChange(positionObj)
 		{
 			hideMask();
-
-			map = new google.maps.Map($('#map').get(0),
-			{
-				zoom: 13,
-				center: {lat: positionObj.coords.latitude, lng: positionObj.coords.longitude},
-				panControl: false,
-				zoomControl: false,
-				draggable: false,
-				scrollwheel: false,
-				mapTypeControl: false,
-				scaleControl: false,
-				streetViewControl: false,
-				overviewMapControl: false
-			});
-			directionsDisplay.setMap(map);
 
 			OnPositionChange = _OnPositionChange;
 
@@ -90,13 +72,13 @@
 			// Checar se a distância dá mais de 2 metros de diferença
 			// Se não, RETURN agora e parar o bagulho
 			if(getDistanceFromLatLonInM(lat, lng, lat_velha, lng_velha) < 2)
-			{
+      {
 				console.log('Distancia ignorada, diferença mto pequena -- 2');
 				return;
 			}
 
-			lat_velha = lat_alvo;
-			lng_velha = lng_alvo;
+			lat_velha = lat;
+			lng_velha = lng;
 
 			geocoder.geocode({'latLng': latLng}, function(geo_result, status)
 			{
@@ -106,7 +88,7 @@
 				}
 			});
 
-			calculateAndDisplayRoute();
+      calculateAndDisplayRoute();
 		}
 
 		var ajax_server_interval = setInterval(RetrieveTrackedLocation, 15 * 1000);
@@ -126,6 +108,8 @@
 					console.log(data, textStatus, jqXHR);
 					if(data.result === true)
 					{
+            hideMask();
+
 						lat_alvo = data.data.lat;
 						lng_alvo = data.data.lng;
 						latLng_alvo = new google.maps.LatLng(lat_alvo, lng_alvo);
@@ -141,6 +125,27 @@
 						lat_alvo_velha = lat_alvo;
 						lng_alvo_velha = lng_alvo;
 
+            if(!map)
+            {
+              navigator.notification.alert('Construindo mapa');
+
+              map = new google.maps.Map($('#map').get(0),
+              {
+                zoom               : 13,
+                center             : {lat: lat_alvo, lng: lng_alvo},
+                panControl         : false,
+                zoomControl        : false,
+                draggable          : false,
+                scrollwheel        : false,
+                mapTypeControl     : false,
+                scaleControl       : false,
+                streetViewControl  : false,
+                overviewMapControl : false
+              });
+
+              directionsDisplay.setMap(map);
+            }
+
 						geocoder.geocode({'latLng': latLng_alvo}, function(geo_result, status)
 						{
 							if(status === google.maps.GeocoderStatus.OK)
@@ -152,13 +157,14 @@
 
 						$("#alvo-data").text(data.data.date);
 
-						calculateAndDisplayRoute();
-
-						hideMask();
+            calculateAndDisplayRoute();
 					}
 					else
 					{
-
+            if(data.special == "")
+            {
+              // TODO: Exibir que o rastreamento foi desligado para vc por esse alvo, e voltar pra pagina pareamentos
+            }
 					}
 				},
 				error: function OnAjaxError(jqXHR, textStatus, errorThrown)
@@ -172,43 +178,42 @@
 			});
 		}
 
-		function calculateAndDisplayRoute()
-		{
-			if(latLng instanceof google.maps.LatLng === false || latLng_alvo instanceof google.maps.LatLng === false)
-			{
-				return false;
-			}
+  	function calculateAndDisplayRoute()
+  	{
+  		if(latLng instanceof google.maps.LatLng === false || latLng_alvo instanceof google.maps.LatLng === false)
+      {
+  			return false;
+  		}
 
-			directionsService.route(
-			{
-				origin: latLng,
-				destination: latLng_alvo,
-				travelMode: google.maps.TravelMode.DRIVING
-			},
-			function(response, status)
-			{
-				if (status === google.maps.DirectionsStatus.OK)
-				{
-					console.log(response);
-					directionsDisplay.setDirections(response);
-					$('#alvo-distancia').text(response.routes[0].legs[0].distance.text);
-				}
-				else
-				{
-					console.log('Directions request failed due to ' + status);
-				}
-			});
-		}
+  		directionsService.route(
+      {
+  			origin: latLng,
+  			destination: latLng_alvo,
+  			travelMode: google.maps.TravelMode.DRIVING
+  		},
+  		function(response, status)
+  		{
+  			if (status === google.maps.DirectionsStatus.OK){
+  				// console.log(response);
+  				directionsDisplay.setDirections(response);
+  				$('#alvo-distancia').text(response.routes[0].legs[0].distance.text);
+  			}
+  			else{
+  				console.log('Directions request failed due to ' + status);
+  			}
+  		});
+  	}
 
 
 		window.INTERVAL_CLEANUP = function()
 		{
-			console.log('Cleanup mapas');
-			window.EMAIL_RASTREIO = null;
+			// console.log('Cleanup mapas');
+			window.USUARIO_RASTREIO = null;
 			window.ID_RASTREIO = null;
 			clearInterval(ajax_server_interval);
+      ajax_server_interval = null;
 			if(positionWatcher !== null)
-			{
+      {
 				navigator.geolocation.clearWatch(positionWatcher);
 				positionWatcher = null;
 			}

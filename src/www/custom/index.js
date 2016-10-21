@@ -1,28 +1,5 @@
-$(document).one('deviceready', function(){
-	//https://www.npmjs.com/package/cordova.plugins.diagnostic
-  cordova.plugins.diagnostic.isLocationAvailable(function(){
-  navigator.notification.alert('apto gps');
-	},function(){
-   $('#geolocMask').css("display","flex");
-	});
-  navigator.notification.alert('ligar gps');
-
-  //outro verificador de GPS -> testar aula do humberto
-  // link https://github.com/fastrde/cordova-plugin-fastrde-checkgps
-  // instalar yourAppDir$ phonegap plugin add https://github.com/fastrde/phonegap-checkGPS.git
-  // CheckGPS.check(function(){
-  //   //GPS is enabled!
-  //   navigator.notification.alert('2o plugin apto');
-  // },
-  // function(){
-  //   //GPS is disabled!
-  //   $('#geolocMask').css("display","flex");
-  //   navigator.notification.alert('2o plugin, erro GPS');
-  // });
-});
-
-
-$(document).ready(function(){
+$(document).ready(function()
+{
 	var user_i = $('#user');
 	var senha_i = $('#senha');
 	var lembra_login = $('#lembrarLogin');
@@ -35,7 +12,7 @@ $(document).ready(function(){
 			url: basePepUrl + "cadastro.php",
 			data:
 			{
-				email : $('#cad_email').val(),
+				email : $('#cad_user').val(),
 				senha : $('#cad_senha').val(),
 				nome : $('#cad_nome').val()
 			},
@@ -78,8 +55,8 @@ $(document).ready(function(){
 				{
 					if(lembra_login.hasClass('active') === true)
 					{
-						localStorage.setItem('login_usr', $('#user').val());
-						localStorage.setItem('login_pwd', $('#senha').val());
+						localStorage.setItem('login_usr', $('#user').val()  || '');
+						localStorage.setItem('login_pwd', $('#senha').val()  || '');
 					}
 					else
 					{

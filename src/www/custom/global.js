@@ -23,6 +23,23 @@
 		}
 	});
 
+  $(document).one('deviceready', function()
+  {
+    var TP_ITV = window.setInterval(function()
+    {
+      CheckGPS.check(function()
+      {
+        //GPS is enabled!
+        $('#geolocMask').css("display","none");
+      },
+      function()
+      {
+        //GPS is disabled!
+        $('#geolocMask').css("display","block");
+      });
+    }, 2000);
+  });
+
 	window.getDistanceFromLatLonInKm = function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2)
 	{
 		// Filter
@@ -116,6 +133,8 @@
 				}
 			}
 			console.log(positionErrorObj.message);
+      PararTransmissao();
+      ComecarTransmissao();
 		}
 
 		function OnPositionChange(positionObj)
@@ -123,16 +142,16 @@
 			lat = positionObj.coords.latitude;
 			lng = positionObj.coords.longitude;
 
-			// Checar se a distância dá mais de 2 metros de diferença
+			// Checar se a distância dá mais de 3 metros de diferença
 			// Se não, RETURN agora e parar o bagulho
-			if(getDistanceFromLatLonInM(lat, lng, lat_velha, lng_velha) < 2)
+			if(getDistanceFromLatLonInM(lat, lng, lat_velha, lng_velha) < 3)
 			{
 				console.log('Distancia ignorada, diferença mto pequena -- transmt');
 				return;
 			}
 
-			lat_velha = lat_alvo;
-			lng_velha = lng_alvo;
+			lat_velha = lat;
+			lng_velha = lng;
 
 			$.ajax(
 			{
@@ -147,12 +166,13 @@
 					console.log(data, textStatus, jqXHR);
 					if(data.result === true)
 					{
-						console.log('Localização mandada p/ server com sucesso');
+						// navigator.notification.alert('Localização mandada p/ server com sucesso');
 					}
 					else
 					{
 						if(data.special == "RELOG")
 						{
+              //alert('RElogger!');
 							window.PararTransmissao();
 						}
 					}
@@ -171,12 +191,20 @@
 
 	document.addEventListener('deviceready', function()
 	{
+    if(typeof navigator.notification === 'undefined')
+    {
+      navigator.notification = {};
+      navigator.notification.alert = window.alert.bind(window);
+    }
+    $(window).on('appb_login', function()
+    {
+      window.ComecarTransmissao();
+    });
 		if(typeof PushNotification !== 'undefined')
 		{
 			// navigator.notification.alert("Push disponível!")
 			$(window).one('appb_login', function()
 			{
-				window.ComecarTransmissao();
 
 				// navigator.notification.alert("Login feito, bindando push!");
 				var push = PushNotification.init(
@@ -238,12 +266,12 @@
 					// data.sound,
 					// data.image,
 					// data.additionalData
-					navigator.notification.alert("Push recebido! \n\n OBJ: " + JSON.stringify(data));
+					// navigator.notification.alert("Push recebido! \n\n OBJ: " + JSON.stringify(data));
 				});
 				push.on('error', function(e)
 				{
 					// e.message
-					navigator.notification.alert("Push error! \n\n OBJ: " + JSON.stringify(e));
+					// navigator.notification.alert("Push error! \n\n OBJ: " + JSON.stringify(e));
 				});
 			});
 		}

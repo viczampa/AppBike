@@ -1,7 +1,8 @@
 
 function setarMapa(rua){
     var localizador = new google.maps.Geocoder();
-    localizador.geocode({"address":rua},function(registro,status){
+    localizador.geocode({"address":rua},function(registro,status)
+    {
         if(status == google.maps.GeocoderStatus.OK){
             var lat = registro[0].geometry.location.lat();
             var long = registro[0].geometry.location.lng();

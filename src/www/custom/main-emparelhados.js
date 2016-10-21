@@ -20,7 +20,7 @@
 							{
 								$('#listaRastreadores').append(
 								"<li class='table-view-cell dyna' data-id='"+ obj.id +"'>"+
-									"<span class='email'>" + obj.email + "</span>" +
+									"<span class='user'>" + obj.user + "</span>" +
 									"<div class='dyna'>" +
 										// "<button class='btn btn-positive emp-aceitar'>Aceitar</button>" +
 										// "<button class='btn btn-negative emp-recusar'>Recusar</button>" +
@@ -31,7 +31,7 @@
 							}
 							else
 							{
-								$('#listaRastreadores').append(Constr_Li_Aceito(obj.id, obj.email, obj.rastreado, obj.habilitado));
+								$('#listaRastreadores').append(Constr_Li_Aceito(obj.id, obj.user, obj.rastreado, obj.habilitado));
 							}
 						}
 						else
@@ -40,7 +40,7 @@
 							{
 								$('#listaRastreados').append(
 								"<li class='table-view-cell dyna' data-id='"+ obj.id +"'>"+
-									"<span class='email'>" + obj.email + "</span>" +
+									"<span class='user'>" + obj.user + "</span>" +
 									"<div>" +
 										"<span class='amz-pendente'>Pedido Pendente</span>" +
 									"</div>" +
@@ -48,7 +48,7 @@
 							}
 							else
 							{
-								$('#listaRastreados').append(Constr_Li_Aceito(obj.id, obj.email, obj.rastreado, obj.habilitado));
+								$('#listaRastreados').append(Constr_Li_Aceito(obj.id, obj.user, obj.rastreado, obj.habilitado));
 							}
 						}
 					});
@@ -71,10 +71,10 @@
 			}
 	});
 
-	function Constr_Li_Aceito(id, email, rastreado, habilitado)
+	function Constr_Li_Aceito(id, user, rastreado, habilitado)
 	{
 		var str = 	"<li class='table-view-cell dyna' data-id='"+ id +"'>"+
-						"<span class='email'>" + email + "</span>" +
+						"<span class='user'>" + user + "</span>" +
 						"<div class='dyna'>" +
 							// "<button class='btn btn-negative emp-remover'>Remover</button>" +
 							"<img class='emp-remover' src='icon/error.png' width='30px' height='30px' />" +
@@ -143,14 +143,14 @@
 		{
 			var li = $(this).closest('li');
 			window.ID_RASTREIO = li.data('id');
-			window.EMAIL_RASTREIO = li.find('.email').text();
+			window.USUARIO_RASTREIO = li.find('.user').text();
 			PUSHMASK({url: 'main-mapas.html', transition: 'slide-out'});
 		});
 
 		function aceitaRecusa(li, resp)
 		{
 			var id = li.data('id');
-			var email = li.find('.email').text();
+			var user = li.find('.user').text();
 			var had = !!(li.find('.emp-remover').length === 1); // had = remover existente?
 			var rastreado = !!(li.closest('#listaRastreados').length === 1); // o alvo é um rastreado?
 			$.ajax(
@@ -175,7 +175,7 @@
 						}
 						else
 						{
-							li.replaceWith(Constr_Li_Aceito(id, email, rastreado , false));
+							li.replaceWith(Constr_Li_Aceito(id, user, rastreado , false));
 						}
 					}
 					else
