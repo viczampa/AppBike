@@ -37,9 +37,9 @@
 	<!--<plugin name="cordova-plugin-local-notifications" source="git" spec="https://github.com/Salesfloor/cordova-plugin-local-notifications.git" />-->
 	<plugin name="cordova-plugin-nativesettings" source="npm" spec="~1.1.0" />
 
-	<plugin name="cordova-plugin-crosswalk-webview" source="npm" spec="~1.8.0">
+	<!--<plugin name="cordova-plugin-crosswalk-webview" source="npm" spec="~1.8.0">
 		<preference name="xwalkMultipleApk" value="false"/>
-	</plugin>
+	</plugin>-->
 
 	<plugin name="cordova.plugins.diagnostic" source="npm" spec="3.2.2" />
 
