@@ -51,9 +51,9 @@
 		return deg * (Math.PI/180);
 	}
 
-	window.getDistanceFromLatLonInM(lat1, lon1, lat2, lon2)
+	window.getDistanceFromLatLonInM = function getDistanceFromLatLonInM(lat1, lon1, lat2, lon2)
 	{
-		return getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) * 1000.0;
+		return getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) * 1000.0;
 	}
 
 	window.IniciarTransmissao = function IniciarTransmissao()
