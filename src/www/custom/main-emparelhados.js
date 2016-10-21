@@ -57,12 +57,12 @@
 				else
 				{
 					console.log(data, textStatus, jqXHR);
-					alert(data.message);
+					navigator.notification.alert(data.message);
 				}
 			},
 			error: function OnAjaxError(jqXHR, textStatus, errorThrown)
 			{
-				alert('Erro ao carregar lista de pareados!');
+				navigator.notification.alert('Erro ao carregar lista de pareados!');
 				console.log(jqXHR, textStatus, errorThrown);
 			},
 			complete: function OnAjaxComplete(jqXHR, textStatus)
@@ -109,17 +109,17 @@
 					// console.log(data, textStatus, jqXHR);
 					if(data.result === true)
 					{
-						// alert(data.message);
+						// navigator.notification.alert(data.message);
 					}
 					else
 					{
-						alert(data.message);
+						navigator.notification.alert(data.message);
 						TogglarBotaoRatchet(event.target);
 					}
 				},
 				error: function OnAjaxError(jqXHR, textStatus, errorThrown)
 				{
-					alert('Erro!');
+					navigator.notification.alert('Erro!');
 					console.log(jqXHR, textStatus, errorThrown);
 					TogglarBotaoRatchet(event.target);
 				},
@@ -168,7 +168,7 @@
 					// console.log(data, textStatus, jqXHR);
 					if(data.result === true)
 					{
-						// alert(data.message);
+						// navigator.notification.alert(data.message);
 						if(resp === false)
 						{
 							li.prettyDel();
@@ -180,12 +180,12 @@
 					}
 					else
 					{
-						alert(data.message);
+						navigator.notification.alert(data.message);
 					}
 				},
 				error: function OnAjaxError(jqXHR, textStatus, errorThrown)
 				{
-					alert('Erro!');
+					navigator.notification.alert('Erro!');
 					console.log(jqXHR, textStatus, errorThrown);
 				},
 				complete: function OnAjaxComplete(jqXHR, textStatus)

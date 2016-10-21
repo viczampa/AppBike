@@ -2,11 +2,11 @@ $(document).one('deviceready', function()
 {
 	cordova.plugins.diagnostic.isLocationAvailable(function()
 	{
-	  alert('apto gps');
+	  navigator.notification.alert('apto gps');
 	}, function()
 	{
 	  $('#geolocMask').css("display","flex");
-	  alert('ligar gps');
+	  navigator.notification.alert('ligar gps');
 	});
 });
 
@@ -33,11 +33,11 @@ $(document).ready(function()
 			{
 				if(data.result === true)
 				{
-					alert(data.message);
+					navigator.notification.alert(data.message);
 				}
 				else
 				{
-					alert(data.message);
+					navigator.notification.alert(data.message);
 				}
 			},
 			error: function OnAjaxError(jqXHR, textStatus, errorThrown)
@@ -83,7 +83,7 @@ $(document).ready(function()
 				}
 				else
 				{
-					alert(data.message);
+					navigator.notification.alert(data.message);
 				}
 			},
 			error: function OnAjaxError(jqXHR, textStatus, errorThrown)

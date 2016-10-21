@@ -17,11 +17,11 @@
 				{
 					if(data.result === true)
 					{
-						alert(data.message);
+						navigator.notification.alert(data.message);
 					}
 					else
 					{
-						alert(data.message);
+						navigator.notification.alert(data.message);
 					}
 				},
 				error: function OnAjaxError(jqXHR, textStatus, errorThrown)

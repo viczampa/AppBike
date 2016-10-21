@@ -174,12 +174,12 @@
 
 		if(typeof PushNotification !== 'undefined')
 		{
-			// alert("Push disponível!")
+			// navigator.notification.alert("Push disponível!")
 			$(window).one('appb_login', function()
 			{
 				window.ComecarTransmissao();
 
-				// alert("Login feito, bindando push!");
+				// navigator.notification.alert("Login feito, bindando push!");
 				var push = PushNotification.init(
 				{
 					android:
@@ -192,7 +192,7 @@
 					},
 					ios:
 					{
-						alert: "true",
+						navigator.notification.alert: "true",
 						badge: "true",
 						sound: "true"
 					},
@@ -201,7 +201,7 @@
 				push.on('registration', function(data)
 				{
 					// data.registrationId
-					alert("Push registrado! \n\n OBJ: " + JSON.stringify(data));
+					navigator.notification.alert("Push registrado! \n\n OBJ: " + JSON.stringify(data));
 					$.ajax(
 					{
 						url: basePepUrl + "push_reg.php",
@@ -239,18 +239,18 @@
 					// data.sound,
 					// data.image,
 					// data.additionalData
-					alert("Push recebido! \n\n OBJ: " + JSON.stringify(data));
+					navigator.notification.alert("Push recebido! \n\n OBJ: " + JSON.stringify(data));
 				});
 				push.on('error', function(e)
 				{
 					// e.message
-					alert("Push error! \n\n OBJ: " + JSON.stringify(e));
+					navigator.notification.alert("Push error! \n\n OBJ: " + JSON.stringify(e));
 				});
 			});
 		}
 		else
 		{
-			alert('Push indisponivel');
+			navigator.notification.alert('Push indisponivel');
 		}
 
 		(function($)
@@ -297,13 +297,13 @@
 					{
 						if(data.result === true)
 						{
-							// alert(data.message);
+							// navigator.notification.alert(data.message);
 							localStorage.removeItem('login_pwd');
 							PUSHMASK({url: 'index.html', transition: 'slide-out'});
 						}
 						else
 						{
-							alert(data.message);
+							navigator.notification.alert(data.message);
 						}
 					},
 					error: function OnAjaxError(jqXHR, textStatus, errorThrown)
