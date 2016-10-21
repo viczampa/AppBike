@@ -9,7 +9,7 @@
     </author>
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="false" />
-    <preference name="android-minSdkVersion" value="14" />
+    <preference name="android-minSdkVersion" value="17" />
     <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />
     <plugin name="cordova-plugin-camera" source="npm" spec="~2.1.1" />
     <plugin name="cordova-plugin-media-capture" source="npm" spec="~1.2.0" />
@@ -34,8 +34,12 @@
 	<plugin name="phonegap-plugin-push" source="npm" spec="~1.8.2">
 		<param name="SENDER_ID" value="172245467834" />
 	</plugin>
-	<plugin name="cordova-plugin-local-notifications" source="npm" spec="~1.0.0" />
+	<!--<plugin name="cordova-plugin-local-notifications" source="git" spec="https://github.com/Salesfloor/cordova-plugin-local-notifications.git" />-->
 	<plugin name="cordova-plugin-nativesettings" source="npm" spec="~1.1.0" />
+
+	<plugin name="cordova-android" source="npm" spec="5.2.2" />
+
+	<plugin name="cordova-plugin-crosswalk-webview" source="npm" spec="~2.1.0" />
 
     <icon src="res/icon/icon.png" />
     <!--<platform name="android">
