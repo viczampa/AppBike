@@ -192,7 +192,7 @@
 					},
 					ios:
 					{
-						navigator.notification.alert: "true",
+						alert: "true",
 						badge: "true",
 						sound: "true"
 					},
