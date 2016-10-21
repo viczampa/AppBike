@@ -58,44 +58,4 @@
 			</div>
 		</div>
 	</body>
-
-<script type="text/javascript">
-  function initMap(){
-          // Try HTML5 geolocation.
-          if (navigator.geolocation){
-            navigator.geolocation.getCurrentPosition(function(position){
-                //apto a buscar localizacao
-                alert('apto a buscar localizacao');
-            }, function() {
-                $('#geolocMask').css("display","flex");
-                alert('O aplicativo precisa que você ligue sua localização para continuarmos');
-                if(typeof cordova.plugins.settings.openSetting != undefined){
-                    cordova.plugins.settings.open(function(){
-                      console.log("abrindo settings")
-                    },
-                    function(){
-                      console.log("nao abriu settings")
-                    });
-                  }
-            });
-          } else {
-            alert('ligue sua localização para usar o app');
-
-          }
-        }
-
-  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-      alert('ligue sua localização');
-      }
-      initMap();
-
-//checagem para celular
-cordova.plugins.diagnostic.isLocationAvailable(function(){
-  alert('apto gps');
-},function(){
-  $('#geolocMask').css("display","flex");
-  alert('ligar gps');
-});
-      </script>
-
 </html>
