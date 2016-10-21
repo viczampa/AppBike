@@ -11,6 +11,9 @@
 	3. Os rastreadores podem visualizar onde o rastreado está baseado nesses dados
 		- Refresh também com AJAX a cada 5 ou 10 segundos
 
+-push
+-obrigação para ligar o gps
+
 -FeedBack user leigo
 
 		tela de login ta feia[
@@ -26,8 +29,5 @@
 		ao cadastrar direcionar para login, e tirar confirmação do email
 
 		placeholder do login com usuario mas tem que ser email
-
-
-
-		placeholder do emparelhar, usuário pensa que tem que por seu email denovo,
+    placeholder do emparelhar, usuário pensa que tem que por seu email denovo,
 		deixar o emparelhar + claro
