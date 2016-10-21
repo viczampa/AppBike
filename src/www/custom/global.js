@@ -45,7 +45,7 @@
 		var d = R * c; // Distance in km
 
 		return d;
-	}
+	};
 
 	function deg2rad(deg)
 	{
@@ -55,7 +55,7 @@
 	window.getDistanceFromLatLonInM = function getDistanceFromLatLonInM(lat1, lon1, lat2, lon2)
 	{
 		return getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) * 1000.0;
-	}
+	};
 
 	// Transmissao funcs
 	(function()
@@ -76,7 +76,7 @@
 			if(positionWatcher)
 				return;
 			positionWatcher = navigator.geolocation.watchPosition(OnPositionChange, OnPositionError, positionSettings);
-		}
+		};
 
 		window.PararTransmissao = function PararTransmissao()
 		{
@@ -85,8 +85,7 @@
 				navigator.geolocation.clearWatch(positionWatcher);
 				positionWatcher = null;
 			}
-		}
-
+		};
 
 		function OnPositionError(positionErrorObj)
 		{
