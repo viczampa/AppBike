@@ -90,14 +90,12 @@
       initMap();
 
 //checagem para celular
-      CheckGPS.check(function(){
-        alert('gps funziona');
-      },
-  function(){
-    //GPS is disabled!
-    $('#geolocMask').css("display","flex");
-    alert('O aplicativo precisa que você ligue sua localização para continuarmos');
-  });
+cordova.plugins.diagnostic.isLocationAvailable(function(){
+  alert('apto gps');
+},function(){
+  $('#geolocMask').css("display","flex");
+  alert('ligar gps');
+});
       </script>
 
 </html>
