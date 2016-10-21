@@ -113,6 +113,28 @@ span.toggle
 }
 
 /* Mask */
+#geolocMask{
+  background-image: url(https://d13yacurqjgara.cloudfront.net/users/79659/screenshots/1633754/geo.gif);
+  z-index: 10000;
+  position: fixed;
+  /* background-position: 0px 0px; */
+  align-items: flex-end;
+  justify-content: center;
+  display: none;
+  width: 0;
+  height: 0;
+  transition: opacity 0.5s;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.content-geoloc{
+  color: white;
+  font-weight: bold;
+  font-family: monospace;
+  margin-bottom: 7%;
+}
+
 #mask
 {
 	background-color:rgba(0, 0, 0, 0.7);

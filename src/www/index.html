@@ -16,6 +16,11 @@
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqQ-IKc7Mx6z0F8Dk2dAsEijVQ6RE0HKg"></script>
 	</head>
 	<body>
+    <div id="geolocMask">
+      <span class='content-geoloc'>
+          Ative sua localização
+    </span>
+    </div>
 		<!-- <nav class="bar bar-nav">
 			<h1 class="title">Login</h1>
 		</nav> -->
@@ -53,15 +58,15 @@
 			</div>
 		</div>
 	</body>
-
-  <script type="text/javascript">
-
-  function initMap() {
+<script type="text/javascript">
+  function initMap(){
           // Try HTML5 geolocation.
-          if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
+          if (navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(function(position){
                 //apto a buscar localizacao
+                alert('apto a buscar localizacao');
             }, function() {
+                $('#geolocMask').css("display","flex");
                 alert('O aplicativo precisa que você ligue sua localização para continuarmos');
                 if(typeof cordova.plugins.settings.openSetting != undefined){
                     cordova.plugins.settings.open(function(){
@@ -71,7 +76,6 @@
                       console.log("nao abriu settings")
                     });
                   }
-                showMask();
             });
           } else {
             alert('ligue sua localização para usar o app');
