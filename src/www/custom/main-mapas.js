@@ -8,6 +8,8 @@
 		var lat_alvo, lng_alvo, address_alvo;
 		var latLng;
 		var latLng_alvo;
+		var lat_velha, lng_velha;
+		var lat_alvo_velha, lng_alvo_velha;
 
 		var directionsService = new google.maps.DirectionsService();
 		var directionsDisplay = new google.maps.DirectionsRenderer();
@@ -85,6 +87,17 @@
 
 			latLng = new google.maps.LatLng(lat,lng);
 
+			// Checar se a distância dá mais de 2 metros de diferença
+			// Se não, RETURN agora e parar o bagulho
+			if(getDistanceFromLatLonInM(lat, lng, lat_velha, lng_velha) < 2)
+			{
+				console.log('Distancia ignorada, diferença mto pequena -- 2');
+				return;
+			}
+
+			lat_velha = lat_alvo;
+			lng_velha = lng_alvo;
+
 			geocoder.geocode({'latLng': latLng}, function(geo_result, status)
 			{
 				if(status === google.maps.GeocoderStatus.OK)
@@ -117,12 +130,16 @@
 						lng_alvo = data.data.lng;
 						latLng_alvo = new google.maps.LatLng(lat_alvo, lng_alvo);
 
-						// TODO: Checar se a distância dá mais de 2 metros de diferença
+						// Checar se a distância dá mais de 2 metros de diferença
 						// Se não, RETURN agora e parar o bagulho
-						if(false)
+						if(getDistanceFromLatLonInM(lat_alvo, lng_alvo, lat_alvo_velha, lng_alvo_velha) < 2)
 						{
+							console.log('Distancia ignorada, diferença mto pequena -- 1');
 							return;
 						}
+
+						lat_alvo_velha = lat_alvo;
+						lng_alvo_velha = lng_alvo;
 
 						geocoder.geocode({'latLng': latLng_alvo}, function(geo_result, status)
 						{

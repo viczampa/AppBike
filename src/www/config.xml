@@ -30,10 +30,13 @@
     <plugin name="cordova-plugin-statusbar" source="npm" spec="~2.1.2" />
     <plugin name="cordova-plugin-vibration" source="npm" spec="~2.1.0" />
     <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
+
 	<plugin name="phonegap-plugin-push" source="npm" spec="~1.8.2">
 		<param name="SENDER_ID" value="172245467834" />
 	</plugin>
 	<plugin name="cordova-plugin-local-notifications" source="npm" spec="~1.0.0" />
+	<plugin name="cordova-plugin-nativesettings" source="npm" spec="~1.1.0" />
+
     <icon src="res/icon/icon.png" />
     <!--<platform name="android">
         <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />

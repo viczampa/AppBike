@@ -84,23 +84,23 @@ $(document).ready(function()
 		});
 	});
 
-	user_i.val(localStorage.getItem('login_usr'));
-	senha_i.val(localStorage.getItem('login_pwd'));
+	user_i.val(localStorage.getItem('login_usr') || '');
+	senha_i.val(localStorage.getItem('login_pwd') || '');
 
 	if(user_i.val().length > 0 && senha_i.val().length > 0 && window.navFromBack !== true)
 	{
 		// Faz login automático
 		$('#loginBtn').click();
 	}
-	
+
 	window.navFromBack = false;
-	
+
 	window.custom_back_key = function()
 	{
 		navigator.app.exitApp();
 		return false;
 	};
-	
+
 	window.INTERVAL_CLEANUP = function()
 	{
 		window.custom_back_key = function(){};
