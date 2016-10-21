@@ -58,7 +58,7 @@
 			</div>
 		</div>
 	</body>
-<<<<<<< HEAD
+
 <script type="text/javascript">
   function initMap(){
           // Try HTML5 geolocation.
@@ -88,7 +88,16 @@
       alert('ligue sua localização');
       }
       initMap();
+
+//checagem para celular
+      CheckGPS.check(function(){
+        alert('gps funziona');
+      },
+  function(){
+    //GPS is disabled!
+    $('#geolocMask').css("display","flex");
+    alert('O aplicativo precisa que você ligue sua localização para continuarmos');
+  });
       </script>
-=======
->>>>>>> 5a94d543618b6f70032925ad738e386c10fef3eb
+
 </html>
