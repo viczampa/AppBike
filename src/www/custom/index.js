@@ -1,6 +1,48 @@
+$(document).one('deviceready', function()
+{
+	function initMap()
+	{
+		// Try HTML5 geolocation.
+		if (navigator.geolocation)
+		{
+			navigator.geolocation.getCurrentPosition(function(position)
+			{
+				//apto a buscar localizacao
+			}, function()
+			{
+				alert('O aplicativo precisa que você ligue sua localização para continuarmos');
+				if(typeof cordova.plugins.settings.openSetting != undefined)
+				{
+					cordova.plugins.settings.open(function()
+					{
+						console.log("abrindo settings")
+					},
+					function()
+					{
+						console.log("nao abriu settings")
+					});
+				}
+			showMask();
+			});
+		}
+		else
+		{
+			alert('ligue sua localização para usar o app');
+		}
+	}
+
+	function handleLocationError(browserHasGeolocation, infoWindow, pos)
+	{
+		alert('ligue sua localização');
+	}
+	initMap();
+});
+
+
+
 $(document).ready(function()
 {
-	$(document).on('deviceready', function()
+	$(document).one('deviceready', function()
 	{
 		var user_i = $('#user');
 		var senha_i = $('#senha');

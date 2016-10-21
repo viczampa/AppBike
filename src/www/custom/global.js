@@ -1,6 +1,6 @@
 (function()
 {
-	$(document).on('deviceready', function()
+	$(document).one('deviceready', function()
 	{
 		window.basePepUrl = 'http://pepperdrinks.smserver.com.br/app/src/public_html/';
 		// window.basePepUrl = 'http://localhost:80/AppBikeServer/src/public_html/';
@@ -67,108 +67,84 @@
 			});
 		};
 
-		document.addEventListener("deviceready", function(event)
+		if(typeof PushNotification !== 'undefined')
 		{
-			// alert("deviceready");
-			if(typeof PushNotification !== 'undefined')
+			// alert("Push disponível!")
+			$(window).one('appb_login', function()
 			{
-				// alert("Push disponível!")
-				$(window).one('appb_login', function()
+				// alert("Login feito, bindando push!");
+				var push = PushNotification.init(
 				{
-					// alert("Login feito, bindando push!");
-					var push = PushNotification.init(
+					android:
 					{
-						android:
-						{
-							senderID: "172245467834"
-						},
-						browser:
-						{
-							// pushServiceURL: 'http://push.api.phonegap.com/v1/push'
-						},
-						ios:
-						{
-							alert: "true",
-							badge: "true",
-							sound: "true"
-						},
-						windows: {}
-					});
-					push.on('registration', function(data)
+						senderID: "172245467834"
+					},
+					browser:
 					{
-						// data.registrationId
-						alert("Push registrado! \n\n OBJ: " + JSON.stringify(data));
-						$.ajax(
+						// pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+					},
+					ios:
+					{
+						alert: "true",
+						badge: "true",
+						sound: "true"
+					},
+					windows: {}
+				});
+				push.on('registration', function(data)
+				{
+					// data.registrationId
+					alert("Push registrado! \n\n OBJ: " + JSON.stringify(data));
+					$.ajax(
+					{
+						url: basePepUrl + "push_reg.php",
+						data:
 						{
-							url: basePepUrl + "push_reg.php",
-							data:
+							regid: data.registrationId
+						},
+						success: function OnAjaxSuccess(data, textStatus, jqXHR)
+						{
+							console.log(data, textStatus, jqXHR);
+							if(data.result === true)
 							{
-								regid: data.registrationId
-							},
-							success: function OnAjaxSuccess(data, textStatus, jqXHR)
-							{
-								console.log(data, textStatus, jqXHR);
-								if(data.result === true)
-								{
 
-								}
-								else
-								{
-
-								}
-							},
-							error: function OnAjaxError(jqXHR, textStatus, errorThrown)
-							{
-								console.log(jqXHR, textStatus, errorThrown);
-							},
-							complete: function OnAjaxComplete(jqXHR, textStatus)
-							{
-								// console.log(jqXHR, textStatus);
 							}
-						});
-					});
-					push.on('notification', function(data)
-					{
-						// data.message,
-						// data.title,
-						// data.count,
-						// data.sound,
-						// data.image,
-						// data.additionalData
-						alert("Push recebido! \n\n OBJ: " + JSON.stringify(data));
-					});
-					push.on('error', function(e)
-					{
-						// e.message
-						alert("Push error! \n\n OBJ: " + JSON.stringify(e));
+							else
+							{
+
+							}
+						},
+						error: function OnAjaxError(jqXHR, textStatus, errorThrown)
+						{
+							console.log(jqXHR, textStatus, errorThrown);
+						},
+						complete: function OnAjaxComplete(jqXHR, textStatus)
+						{
+							// console.log(jqXHR, textStatus);
+						}
 					});
 				});
-			}
-			else
-			{
-				alert('Push indisponivel');
-			}
-		});
-
-
-		/*
-		$.getScript( "https://www.gstatic.com/firebasejs/3.4.1/firebase.js", function(data, textStatus, jqxhr)
-		{
-			window.setTimeout(function()
-			{
-				var config =
+				push.on('notification', function(data)
 				{
-					apiKey: "AIzaSyCyLB3C18FS_FSLkpoYKGp1Hig-vytaumg",
-					authDomain: "appbike-146203.firebaseapp.com",
-					databaseURL: "https://appbike-146203.firebaseio.com",
-					storageBucket: "appbike-146203.appspot.com",
-					messagingSenderId: "172245467834"
-				};
-				firebase.initializeApp(config);
-			}, 5);
-		});
-		*/
-
+					// data.message,
+					// data.title,
+					// data.count,
+					// data.sound,
+					// data.image,
+					// data.additionalData
+					alert("Push recebido! \n\n OBJ: " + JSON.stringify(data));
+				});
+				push.on('error', function(e)
+				{
+					// e.message
+					alert("Push error! \n\n OBJ: " + JSON.stringify(e));
+				});
+			});
+		}
+		else
+		{
+			alert('Push indisponivel');
+		}
 
 		(function($)
 		{
@@ -318,6 +294,7 @@
 		// Evento de navegação pela PUSH
 		function checkPage()
 		{
+			console.log('checkPage chamado');
 			// Histórico artificial
 			window.artificialHistory.push(window.location.href);
 
@@ -330,6 +307,7 @@
 			{
 				script = $(script);
 				var orig_src = script.attr('src');
+				console.log('carregando script ' + orig_src);
 				$.getScript( orig_src, function(data, textStatus, jqxhr)
 				{
 					// Success, pegou o script e está rodando/rodou
