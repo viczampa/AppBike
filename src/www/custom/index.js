@@ -1,4 +1,5 @@
 $(document).one('deviceready', function(){
+	//https://www.npmjs.com/package/cordova.plugins.diagnostic
   cordova.plugins.diagnostic.isLocationAvailable(function(){
   navigator.notification.alert('apto gps');
 	},function(){
