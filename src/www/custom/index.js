@@ -1,7 +1,7 @@
 $(document).ready(function()
 {
-	var user_i = $('#user');
-	var senha_i = $('#senha');
+	var user_i       = $('#user');
+	var senha_i      = $('#senha');
 	var lembra_login = $('#lembrarLogin');
 
 	$('#cadastrarBtn').on('click', function(event)
@@ -12,23 +12,19 @@ $(document).ready(function()
 			url: basePepUrl + "cadastro.php",
 			data:
 			{
-				user : $('#cad_user').val(),
+				user  : $('#cad_user').val(),
 				senha : $('#cad_senha').val(),
-				nome : $('#cad_nome').val()
+				nome  : $('#cad_nome').val()
 			},
-			success: function OnAjaxSuccess(data, textStatus, jqXHR)
-			{
-				if(data.result === true)
-				{
+			success: function OnAjaxSuccess(data, textStatus, jqXHR){
+				if(data.result === true){
 					navigator.notification.alert(data.message);
 				}
-				else
-				{
+				else{
 					navigator.notification.alert(data.message);
 				}
 			},
-			error: function OnAjaxError(jqXHR, textStatus, errorThrown)
-			{
+			error: function OnAjaxError(jqXHR, textStatus, errorThrown){
 				console.log(jqXHR, textStatus, errorThrown);
 			},
 			complete: function OnAjaxComplete(jqXHR, textStatus)
