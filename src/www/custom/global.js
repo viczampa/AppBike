@@ -28,13 +28,11 @@
   {
     var TP_ITV = window.setInterval(function()
     {
-      CheckGPS.check(function()
-      {
+      CheckGPS.check(function(){
         //GPS is enabled!
         $('#geolocMask').css("display","none");
       },
-      function()
-      {
+      function(){
         //GPS is disabled!
         $('#geolocMask').css("display","block");
         function openAdjust(){
@@ -42,7 +40,7 @@
               cordova.plugins.settings.open(function(){
               },
               function(){
-                console.log("failed to open settings")
+                console.log("failed to open settings");
 
         function openAdjust()
 		{
@@ -55,6 +53,7 @@
               function()
 			  {
                 console.log("failed to open settings");
+
               });
           }
         }
