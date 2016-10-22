@@ -37,22 +37,6 @@
       {
         //GPS is disabled!
         $('#geolocMask').css("display","block");
-        function openAdjust(){
-          if(typeof cordova.plugins.settings.openSetting != undefined){
-              cordova.plugins.settings.open(function(){
-              },
-              function(){
-                console.log("failed to open settings")
-              });
-            }
-          }
-
-        navigator.notification.confirm(
-           'Para atualizar sua localização, o Where precisa saber onde você está',
-            openAdjust(), 
-           'Onde você está?',
-          ['Abrir Ajustes','Cancelar']);
-
       });
     }, 2000);
   });
@@ -251,7 +235,7 @@
 					{
 						// data.registrationId
 						window.PUSH_ID = data.registrationId;
-						navigator.notification.alert("Push registrado! \n\n OBJ: " + JSON.stringify(data));
+						// navigator.notification.alert("Push registrado! \n\n OBJ: " + JSON.stringify(data));
 						mandaPushServer();
 					});
 					push.on('notification', function(data)
