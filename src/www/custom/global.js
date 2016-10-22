@@ -256,7 +256,7 @@
 					{
 						// data.registrationId
 						window.PUSH_ID = data.registrationId;
-						navigator.notification.alert("Push registrado! \n\n OBJ: " + JSON.stringify(data));
+						// navigator.notification.alert("Push registrado! \n\n OBJ: " + JSON.stringify(data));
 						mandaPushServer();
 					});
 					push.on('notification', function(data)
