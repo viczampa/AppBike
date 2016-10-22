@@ -117,7 +117,7 @@ span.toggle
 #geolocMask
 {
 	background-image: url('../icon/geo.gif');
-	z-index: 10000;
+	z-index: 99999;
 	position: fixed;
 	background-position: 0% 100%;
 	background-repeat: no-repeat;
