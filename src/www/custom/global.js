@@ -1,7 +1,6 @@
 (function()
 {
 	window.basePepUrl = 'http://pepperdrinks.smserver.com.br/app/src/public_html/';
-	// window.basePepUrl = 'http://localhost:80/AppBikeServer/src/public_html/';
 	window.artificialHistory = [];
 	window.INTERVAL_CLEANUP = function(){};
 	window.custom_back_key = function(){};
@@ -24,71 +23,44 @@
 		}
 	});
 
-  $(document).one('deviceready', function()
-  {
-	  window.isAway = false;
-	  $(document).on('pause', function()
-	  {
-		  window.isAway = true;
-	  });
-	  $(document).on('resume', function()
-	  {
-		  window.isAway = false;
-	  });
-    var TP_ITV = window.setInterval(function CheckG()
-    {
+  $(document).one('deviceready', function(){
+ 	  window.isAway = false;
+ 	  $(document).on('pause', function(){
+ 		  window.isAway = true;
+ 	  });
+ 	  $(document).on('resume', function(){
+ 		  window.isAway = false;
+ 	  });
+     var TP_ITV = window.setInterval(function CheckG(){
+       CheckGPS.check(function(){
+         if(window.isAway)
+ 			       return;
+           //GPS is enabled!
+           $('#geolocMask').css("display","none");
+       },
+       function(){
+         //GPS is disabled!
+         $('#geolocMask').css("display","block");
+         function openAdjust(){
+           if(typeof cordova.plugins.settings.openSetting != undefined){
+               cordova.plugins.settings.open(function(){
+ 				  	         TP_ITV = window.setInterval(CheckG, 2000);
+         		},function(){
+               console.log("failed to open settings");
+               TP_ITV = window.setInterval(CheckG, 2000);
+             });
+           }
+         }
 
-      CheckGPS.check(function(){
-
-		if(window.isAway)
-			return;
-      CheckGPS.check(function()
-      {
-
-        //GPS is enabled!
-        $('#geolocMask').css("display","none");
-      },
-      function(){
-        //GPS is disabled!
-        $('#geolocMask').css("display","block");
-
-        function openAdjust(){
-          if(typeof cordova.plugins.settings.openSetting != undefined){
-              cordova.plugins.settings.open(function(){
-              },
-              function(){
-                console.log("failed to open settings");
-        function openAdjust()
-		{
-          if(typeof cordova.plugins.settings.openSetting != undefined)
-		  {
-              cordova.plugins.settings.open(function()
-			  {
-				  	TP_ITV = window.setInterval(CheckG, 2000);
-        		},
-              function()
-			  {
-
-                console.log("failed to open settings");
-
-
-				  TP_ITV = window.setInterval(CheckG, 2000);
-                	console.log("failed to open settings");
-
-              });
-          }
-        }
-
-		window.clearInterval(TP_ITV);
-
-        navigator.notification.confirm(
-           'Para atualizar sua localização, o Where precisa saber onde você está',
-            openAdjust,
-           'Onde você está?',
-          ['Abrir Ajustes']);
-      });
-    }, 2000);
-  });
+ 		window.clearInterval(TP_ITV);
+     navigator.notification.confirm(
+       'Para atualizar sua localização, o Where precisa saber onde você está',
+        openAdjust,
+       'Onde você está?',
+       ['Abrir Ajustes']);
+       });
+     }, 2000);
+   });
 
 	window.getDistanceFromLatLonInKm = function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2)
 	{
@@ -105,8 +77,7 @@
 		var a =
 		Math.sin(dLat/2) * Math.sin(dLat/2) +
 		Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-		Math.sin(dLon/2) * Math.sin(dLon/2)
-		;
+		Math.sin(dLon/2) * Math.sin(dLon/2);
 
 		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 		var d = R * c; // Distance in km
