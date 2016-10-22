@@ -49,7 +49,7 @@
 
         navigator.notification.confirm(
            'Para atualizar sua localização, o Where precisa saber onde você está',
-            openAdjust(), 
+            openAdjust,
            'Onde você está?',
           ['Abrir Ajustes','Cancelar']);
 
