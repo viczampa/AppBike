@@ -41,6 +41,8 @@
 		<preference name="xwalkMultipleApk" value="false"/>
 	</plugin>-->
 
+	<plugin name="cordova-plugin-fastrde-checkgps" source="npm" spec="~1.0.0" />
+
 	<plugin name="cordova.plugins.diagnostic" source="npm" spec="3.2.2" />
 
     <icon src="res/icon/icon.png" />
